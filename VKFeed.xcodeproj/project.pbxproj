@@ -38,6 +38,18 @@
 		1FF965D72CA4261B004D752E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D62CA4261B004D752E /* Swinject */; };
 		1FF965DA2CA42624004D752E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D92CA42624004D752E /* SnapKit */; };
 		1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965E62CA558D3004D752E /* VKConfig.swift */; };
+		1FF965EA2CA560F8004D752E /* NewsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965E92CA560F8004D752E /* NewsFeedCollectionViewController.swift */; };
+		1FF965ED2CA561AA004D752E /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965EC2CA561AA004D752E /* PostCell.swift */; };
+		1FF965EF2CA562D9004D752E /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965EE2CA562D9004D752E /* GlobalConstants.swift */; };
+		1FF965F12CA56449004D752E /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F02CA56449004D752E /* UICollectionView+Ext.swift */; };
+		1FF965F32CA57C00004D752E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F22CA57C00004D752E /* UIView+Ext.swift */; };
+		1FF965F52CA57C80004D752E /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F42CA57C80004D752E /* UIFont+Ext.swift */; };
+		1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F62CA57CD1004D752E /* VKLabel.swift */; };
+		1FF965F92CA57CFB004D752E /* VKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F82CA57CFB004D752E /* VKImageView.swift */; };
+		1FF965FE2CA5B80A004D752E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FD2CA5B80A004D752E /* UIViewController.swift */; };
+		1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */; };
+		1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966012CA5C766004D752E /* KeychainKeys.swift */; };
+		1FF966052CA5CD94004D752E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966042CA5CD94004D752E /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +84,18 @@
 		1FF965D12CA425C7004D752E /* PostDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewModel.swift; sourceTree = "<group>"; };
 		1FF965D32CA425CE004D752E /* PostDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsRouter.swift; sourceTree = "<group>"; };
 		1FF965E62CA558D3004D752E /* VKConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKConfig.swift; sourceTree = "<group>"; };
+		1FF965E92CA560F8004D752E /* NewsFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCollectionViewController.swift; sourceTree = "<group>"; };
+		1FF965EC2CA561AA004D752E /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		1FF965EE2CA562D9004D752E /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		1FF965F02CA56449004D752E /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
+		1FF965F22CA57C00004D752E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		1FF965F42CA57C80004D752E /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		1FF965F62CA57CD1004D752E /* VKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLabel.swift; sourceTree = "<group>"; };
+		1FF965F82CA57CFB004D752E /* VKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKImageView.swift; sourceTree = "<group>"; };
+		1FF965FD2CA5B80A004D752E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStorage.swift; sourceTree = "<group>"; };
+		1FF966012CA5C766004D752E /* KeychainKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
+		1FF966042CA5CD94004D752E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +173,8 @@
 		1FF965932CA3F806004D752E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965EE2CA562D9004D752E /* GlobalConstants.swift */,
+				1FF966012CA5C766004D752E /* KeychainKeys.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -156,6 +182,10 @@
 		1FF965942CA3F80A004D752E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965FD2CA5B80A004D752E /* UIViewController.swift */,
+				1FF965F22CA57C00004D752E /* UIView+Ext.swift */,
+				1FF965F02CA56449004D752E /* UICollectionView+Ext.swift */,
+				1FF965F42CA57C80004D752E /* UIFont+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,6 +203,7 @@
 			children = (
 				1FF965A22CA3F99C004D752E /* Network */,
 				1FF965A12CA3F990004D752E /* Storages */,
+				1FF966032CA5CD86004D752E /* Managers */,
 				1FF965A02CA3F979004D752E /* Repositories */,
 			);
 			path = Data;
@@ -250,6 +281,7 @@
 		1FF9659E2CA3F957004D752E /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965EB2CA56182004D752E /* Views */,
 				1FF965C92CA425A8004D752E /* NewsFeedViewController.swift */,
 				1FF965CB2CA425AF004D752E /* NewsFeedViewModel.swift */,
 				1FF965CD2CA425B6004D752E /* NewsFeedRouter.swift */,
@@ -280,6 +312,7 @@
 		1FF965A12CA3F990004D752E /* Storages */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */,
 			);
 			path = Storages;
 			sourceTree = "<group>";
@@ -304,6 +337,8 @@
 		1FF965C82CA423BC004D752E /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965F62CA57CD1004D752E /* VKLabel.swift */,
+				1FF965F82CA57CFB004D752E /* VKImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -314,6 +349,23 @@
 				1FF965E62CA558D3004D752E /* VKConfig.swift */,
 			);
 			path = Configurations;
+			sourceTree = "<group>";
+		};
+		1FF965EB2CA56182004D752E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1FF965E92CA560F8004D752E /* NewsFeedCollectionViewController.swift */,
+				1FF965EC2CA561AA004D752E /* PostCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1FF966032CA5CD86004D752E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1FF966042CA5CD94004D752E /* KeychainManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,32 +447,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF965F32CA57C00004D752E /* UIView+Ext.swift in Sources */,
 				1FF965C12CA422ED004D752E /* APIService.swift in Sources */,
+				1FF965FE2CA5B80A004D752E /* UIViewController.swift in Sources */,
+				1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */,
 				1FF965A62CA3FD6E004D752E /* LoginViewController.swift in Sources */,
+				1FF965ED2CA561AA004D752E /* PostCell.swift in Sources */,
 				1FF965B62CA42291004D752E /* FetchNewsFeedUseCase.swift in Sources */,
 				1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */,
 				1FF965D22CA425C7004D752E /* PostDetailsViewModel.swift in Sources */,
+				1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */,
 				1FF9658E2CA3F7B6004D752E /* SceneDelegate.swift in Sources */,
 				1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */,
 				1FF965A42CA3FD62004D752E /* LoginViewModel.swift in Sources */,
+				1FF966052CA5CD94004D752E /* KeychainManager.swift in Sources */,
 				1FF965A82CA3FD81004D752E /* AuthenticationUseCase.swift in Sources */,
 				1FF965C72CA4234B004D752E /* VKError.swift in Sources */,
 				1FF965B82CA4229D004D752E /* LikePostUseCase.swift in Sources */,
 				1FF965BC2CA422C4004D752E /* PostDetailsRepository.swift in Sources */,
 				1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */,
 				1FF965B02CA41CF4004D752E /* UseCase.swift in Sources */,
+				1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */,
 				1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */,
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
 				1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */,
+				1FF965EA2CA560F8004D752E /* NewsFeedCollectionViewController.swift in Sources */,
 				1FF965CC2CA425AF004D752E /* NewsFeedViewModel.swift in Sources */,
 				1FF965D42CA425CE004D752E /* PostDetailsRouter.swift in Sources */,
 				1FF965C32CA4231D004D752E /* NewsFeedRepositoryImpl.swift in Sources */,
+				1FF965F12CA56449004D752E /* UICollectionView+Ext.swift in Sources */,
+				1FF965F52CA57C80004D752E /* UIFont+Ext.swift in Sources */,
+				1FF965EF2CA562D9004D752E /* GlobalConstants.swift in Sources */,
 				1FF965B22CA42242004D752E /* Post.swift in Sources */,
 				1FF965BF2CA422E1004D752E /* API.swift in Sources */,
 				1FF965C52CA42327004D752E /* PostDetailsRepositoryImpl.swift in Sources */,
 				1FF965CE2CA425B6004D752E /* NewsFeedRouter.swift in Sources */,
 				1FF965D02CA425BE004D752E /* PostDetailsViewController.swift in Sources */,
 				1FF965B42CA42247004D752E /* User.swift in Sources */,
+				1FF965F92CA57CFB004D752E /* VKImageView.swift in Sources */,
 				1FF965CA2CA425A8004D752E /* NewsFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

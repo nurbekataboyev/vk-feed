@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class VKConfig {
+struct VKConfig {
     static let clientID = "52349608"
     static let secretKey = ""
 }

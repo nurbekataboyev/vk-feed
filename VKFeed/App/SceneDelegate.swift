@@ -13,10 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
-        window?.makeKeyAndVisible()
+        setupWindowScene(windowScene)
     }
     
     
@@ -50,6 +47,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+    
+}
+
+
+extension SceneDelegate {
+    
+    private func setupWindowScene(_ windowScene: UIWindowScene) {
+        let rootViewController = isAccessTokenValid ? NewsFeedRouterImpl.configure() : LoginRouterImpl.configure()
+        
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
+        window?.makeKeyAndVisible()
+    }
+    
+    
+    private var isAccessTokenValid: Bool {
+        let keychainManager = KeychainManager()
+        let accessTokenStorage = AccessTokenStorageImpl(keychainManager: keychainManager)
+        
+        let isAccessTokenValid = accessTokenStorage.get() != nil
+        
+        return isAccessTokenValid
     }
     
 }

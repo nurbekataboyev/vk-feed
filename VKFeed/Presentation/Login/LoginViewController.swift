@@ -10,6 +10,13 @@ import WebKit
 
 final class LoginViewController: UIViewController {
     
+    private let viewModel: LoginViewModel
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +49,11 @@ final class LoginViewController: UIViewController {
         return webView
     }
     
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 
@@ -56,14 +68,18 @@ extension LoginViewController: WKNavigationDelegate {
             return
         }
         
-        let accessToken = getAccessToken(from: fragment)
-        print(accessToken)
+        guard let accessToken = getAccessToken(from: fragment) else {
+            presentAlert()
+            return
+        }
+        
+        viewModel.saveAccessToken(accessToken)
         
         decisionHandler(.cancel)
     }
     
     
-    private func getAccessToken(from fragment: String) -> String {
+    private func getAccessToken(from fragment: String) -> String? {
         let parameters = fragment.components(separatedBy: "&")
             .map { $0.components(separatedBy: "=") }
             .reduce([String: String]()) { result, parameter in
@@ -75,7 +91,7 @@ extension LoginViewController: WKNavigationDelegate {
                 return dictionary
             }
         
-        return parameters["access_token"] ?? ""
+        return parameters["access_token"]
     }
     
 }
