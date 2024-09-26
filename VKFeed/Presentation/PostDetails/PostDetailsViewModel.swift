@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol PostDetailsViewModel {
+    
+}
+
+final class PostDetailsViewModelImpl: PostDetailsViewModel {
+    
+    
+    
+}

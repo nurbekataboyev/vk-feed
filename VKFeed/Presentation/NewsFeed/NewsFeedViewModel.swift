@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol NewsFeedViewModel {
+    
+}
+
+final class NewsFeedViewModelImpl: NewsFeedViewModel {
+    
+    
+    
+}

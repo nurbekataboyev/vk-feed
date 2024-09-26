@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Post {
+    let id: String
+    let authorName: String
+    let authorAvatarURL: String
+    let createdAt: Date
+    let text: String
+}

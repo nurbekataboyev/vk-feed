@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol AuthenticationRepository {
+    func saveAccessToken(_ token: String)
+    func getAccessToken() -> String?
+}
