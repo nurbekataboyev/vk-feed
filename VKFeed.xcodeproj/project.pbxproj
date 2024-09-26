@@ -37,8 +37,7 @@
 		1FF965D42CA425CE004D752E /* PostDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965D32CA425CE004D752E /* PostDetailsRouter.swift */; };
 		1FF965D72CA4261B004D752E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D62CA4261B004D752E /* Swinject */; };
 		1FF965DA2CA42624004D752E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D92CA42624004D752E /* SnapKit */; };
-		1FF965DD2CA4292F004D752E /* VKID in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965DC2CA4292F004D752E /* VKID */; };
-		1FF965DF2CA4292F004D752E /* VKIDCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965DE2CA4292F004D752E /* VKIDCore */; };
+		1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965E62CA558D3004D752E /* VKConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +71,7 @@
 		1FF965CF2CA425BE004D752E /* PostDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewController.swift; sourceTree = "<group>"; };
 		1FF965D12CA425C7004D752E /* PostDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewModel.swift; sourceTree = "<group>"; };
 		1FF965D32CA425CE004D752E /* PostDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsRouter.swift; sourceTree = "<group>"; };
+		1FF965E62CA558D3004D752E /* VKConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FF965D72CA4261B004D752E /* Swinject in Frameworks */,
-				1FF965DD2CA4292F004D752E /* VKID in Frameworks */,
 				1FF965DA2CA42624004D752E /* SnapKit in Frameworks */,
-				1FF965DF2CA4292F004D752E /* VKIDCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +201,7 @@
 		1FF965992CA3F8BB004D752E /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				1FF965E82CA55B21004D752E /* Configurations */,
 				1FF965842CA3F7B6004D752E /* Info.plist */,
 			);
 			path = Support;
@@ -309,6 +308,14 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		1FF965E82CA55B21004D752E /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				1FF965E62CA558D3004D752E /* VKConfig.swift */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,8 +335,6 @@
 			packageProductDependencies = (
 				1FF965D62CA4261B004D752E /* Swinject */,
 				1FF965D92CA42624004D752E /* SnapKit */,
-				1FF965DC2CA4292F004D752E /* VKID */,
-				1FF965DE2CA4292F004D752E /* VKIDCore */,
 			);
 			productName = VKFeed;
 			productReference = 1FF9656A2CA3F637004D752E /* VKFeed.app */;
@@ -362,7 +367,6 @@
 			packageReferences = (
 				1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */,
 				1FF965D82CA42624004D752E /* XCRemoteSwiftPackageReference "SnapKit" */,
-				1FF965DB2CA4292F004D752E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1FF9656B2CA3F637004D752E /* Products */;
@@ -407,6 +411,7 @@
 				1FF965B02CA41CF4004D752E /* UseCase.swift in Sources */,
 				1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */,
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
+				1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */,
 				1FF965CC2CA425AF004D752E /* NewsFeedViewModel.swift in Sources */,
 				1FF965D42CA425CE004D752E /* PostDetailsRouter.swift in Sources */,
 				1FF965C32CA4231D004D752E /* NewsFeedRepositoryImpl.swift in Sources */,
@@ -655,14 +660,6 @@
 				minimumVersion = 5.7.1;
 			};
 		};
-		1FF965DB2CA4292F004D752E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/VKCOM/vkid-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -675,16 +672,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF965D82CA42624004D752E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		1FF965DC2CA4292F004D752E /* VKID */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF965DB2CA4292F004D752E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
-			productName = VKID;
-		};
-		1FF965DE2CA4292F004D752E /* VKIDCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF965DB2CA4292F004D752E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
-			productName = VKIDCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol LoginViewModel {
+    
+}
+
+final class LoginViewModelImpl: LoginViewModel {
+    
+    
+    
+}
