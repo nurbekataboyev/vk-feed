@@ -16,6 +16,7 @@ final class NewsFeedViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private var collectionView = NewsFeedCollectionViewController()
+    private lazy var loadingView = VKLoadingView(viewController: self)
     
     init(viewModel: NewsFeedViewModel) {
         self.viewModel = viewModel
@@ -39,23 +40,17 @@ final class NewsFeedViewController: UIViewController {
             .dropFirst()
             .sink { newsFeed in
                 
-                guard let _ = newsFeed.response else { return }
+                print(newsFeed)
                 
-                for item in newsFeed.response!.items {
-                    print("---")
-                    print(item)
-                    print("---")
-                }
-                
-                for item in newsFeed.response!.groups {
-                    print("---")
-                    print(item)
-                    print("---")
-                }
-                
-                print("---")
-                print(newsFeed.response!.nextFrom)
-                print("---")
+            }
+            .store(in: &cancellables)
+        
+        viewModel.isLoadingPublisher
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { [weak self] isLoading in
+                guard let self else { return }
+                isLoading ? loadingView.showLoadingView() : loadingView.dismissLoadingView()
             }
             .store(in: &cancellables)
         

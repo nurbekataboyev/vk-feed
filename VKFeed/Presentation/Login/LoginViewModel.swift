@@ -13,8 +13,6 @@ protocol LoginViewModel {
 
 final class LoginViewModelImpl: LoginViewModel {
     
-    @Published private(set) var isLoggedIn: Bool = false
-    
     private let authenticationUseCase: AuthenticationUseCase
     private let router: LoginRouter
     

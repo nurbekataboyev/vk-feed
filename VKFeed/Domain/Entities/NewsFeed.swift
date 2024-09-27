@@ -11,6 +11,29 @@ struct NewsFeed: Decodable {
     let response: NewsFeedResponse?
 }
 
+extension NewsFeedItem {
+    
+    public func toPost(groups: [NewsFeedGroup]) -> Post {
+        var owner: PostOwner? = nil
+        
+        if let postOwner = groups.first(where: { $0.id == abs(sourceID) }) {
+            owner = PostOwner(id: postOwner.id, name: postOwner.name, photoURL: postOwner.photoURL)
+        }
+        
+        let post = Post(
+            postID: postID,
+            text: text,
+            photosURLs: attachments.map { $0.photo?.photo.url },
+            likesCount: likes.count,
+            userLikes: likes.userLikes == 1,
+            createdAt: Date(timeIntervalSince1970: TimeInterval(date)),
+            owner: owner)
+        
+        return post
+    }
+    
+}
+
 struct NewsFeedResponse: Decodable {
     let items: [NewsFeedItem]
     let groups: [NewsFeedGroup]
