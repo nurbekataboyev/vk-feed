@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB252CA6E06E001BB6BF /* Post.swift */; };
+		1F9DDB282CA71CEF001BB6BF /* VKLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		1F9DDB252CA6E06E001BB6BF /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoadingView.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			children = (
 				1FF965F62CA57CD1004D752E /* VKLabel.swift */,
 				1FF965F82CA57CFB004D752E /* VKImageView.swift */,
+				1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				1FF965BC2CA422C4004D752E /* PostDetailsRepository.swift in Sources */,
 				1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */,
 				1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */,
+				1F9DDB282CA71CEF001BB6BF /* VKLoadingView.swift in Sources */,
 				1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */,
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
 				1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */,

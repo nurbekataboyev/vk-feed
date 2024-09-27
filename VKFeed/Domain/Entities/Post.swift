@@ -8,13 +8,17 @@
 import Foundation
 
 struct Post {
-    let postID: String
+    let postID: Int
     let text: String
-    let owner: PostOwner
+    let photosURLs: [String?]
+    let likesCount: Int
+    let userLikes: Bool
+    let createdAt: Date
+    let owner: PostOwner?
 }
 
 struct PostOwner {
-    let id: String
+    let id: Int
     let name: String
     let photoURL: String
 }

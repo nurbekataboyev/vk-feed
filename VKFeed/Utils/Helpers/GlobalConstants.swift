@@ -31,4 +31,12 @@ struct GlobalConstants {
         static let medium: CGFloat = 15
     }
     
+    
+    struct AnimationDuration {
+        static let extraShort: TimeInterval = 0.1
+        static let short: TimeInterval = 0.25
+        static let medium: TimeInterval = 0.5
+        static let long: TimeInterval = 1.0
+    }
+    
 }
