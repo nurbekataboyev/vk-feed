@@ -17,8 +17,8 @@ final class LoginRouterImpl: LoginRouter {
     private weak var viewController: UIViewController?
     
     static func configure() -> UIViewController {
-        let keychainManager = KeychainManager()
-        let accessTokenStorage = AccessTokenStorageImpl(keychainManager: keychainManager)
+        let keychainService = KeychainService()
+        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         let authRepository = AuthenticationRepositoryImpl(storage: accessTokenStorage)
         let authUseCase = AuthenticationUseCaseImpl(repository: authRepository)
         let router = LoginRouterImpl()

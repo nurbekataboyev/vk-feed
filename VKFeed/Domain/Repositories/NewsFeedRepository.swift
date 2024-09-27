@@ -6,9 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol NewsFeedRepository {
-    
-    
-    
+    func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error>
 }

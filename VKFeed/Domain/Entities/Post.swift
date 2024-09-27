@@ -2,15 +2,19 @@
 //  Post.swift
 //  VKFeed
 //
-//  Created by Nurbek on 25/09/24.
+//  Created by Nurbek on 27/09/24.
 //
 
 import Foundation
 
 struct Post {
-    let id: String
-    let authorName: String
-    let authorAvatarURL: String
-    let createdAt: Date
+    let postID: String
     let text: String
+    let owner: PostOwner
+}
+
+struct PostOwner {
+    let id: String
+    let name: String
+    let photoURL: String
 }

@@ -64,8 +64,8 @@ extension SceneDelegate {
     
     
     private var isAccessTokenValid: Bool {
-        let keychainManager = KeychainManager()
-        let accessTokenStorage = AccessTokenStorageImpl(keychainManager: keychainManager)
+        let keychainService = KeychainService()
+        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         
         let isAccessTokenValid = accessTokenStorage.get() != nil
         

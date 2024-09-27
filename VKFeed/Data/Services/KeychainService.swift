@@ -1,5 +1,5 @@
 //
-//  KeychainManager.swift
+//  KeychainService.swift
 //  VKFeed
 //
 //  Created by Nurbek on 26/09/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class KeychainManager {
+final class KeychainService {
     
     public func save<Value: Encodable>(value: Value, forKey key: KeychainKeys.Key) {
         let encoder = JSONEncoder()
@@ -15,6 +15,7 @@ final class KeychainManager {
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue,
             kSecValueData as String: data
         ]
@@ -27,6 +28,7 @@ final class KeychainManager {
     public func get<Value: Decodable>(forKey key: KeychainKeys.Key) -> Value? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
@@ -48,6 +50,7 @@ final class KeychainManager {
     public func delete(forKey key: KeychainKeys.Key) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue
         ]
         

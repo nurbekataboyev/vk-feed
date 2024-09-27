@@ -14,7 +14,14 @@ protocol NewsFeedRouter {
 final class NewsFeedRouterImpl: NewsFeedRouter {
     
     static func configure() -> UIViewController {
-        let newsFeed = NewsFeedViewController()
+        let apiService = APIService()
+        let keychainService = KeychainService()
+        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
+        let newsFeedRepository = NewsFeedRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
+        let fetchNewsFeedUseCase = FetchNewsFeedUseCaseImpl(repository: newsFeedRepository)
+        let viewModel = NewsFeedViewModelImpl(fetchNewsFeedUseCase: fetchNewsFeedUseCase)
+        let newsFeed = NewsFeedViewController(viewModel: viewModel)
+        
         return newsFeed
     }
     
