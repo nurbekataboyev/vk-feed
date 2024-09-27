@@ -20,14 +20,14 @@ final class PostCell: UICollectionViewCell {
     private var postDateLabel = VKLabel(style: .footnote, color: .secondaryLabel)
     private var postTextLabel = VKLabel(style: .subheadline)
     
-    public func configure(with post: Post) {
+    public func configure(with post: NewsFeed) {
         authorAvatarImageView.backgroundColor = .blue
         
-        authorNameLabel.text = post.authorName
-        
-        postDateLabel.text = post.createdAt.ISO8601Format()
-        
-        postTextLabel.text = post.text
+//        authorNameLabel.text = post.authorName
+//        
+//        postDateLabel.text = post.createdAt.ISO8601Format()
+//        
+//        postTextLabel.text = post.text
         
         layout()
     }

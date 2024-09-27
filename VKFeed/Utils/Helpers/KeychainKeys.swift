@@ -9,6 +9,8 @@ import Foundation
 
 struct KeychainKeys {
     
+    static let accessGroup = "com.nurbekios.vkfeed"
+    
     enum Key: String {
         case accessToken = "accessTokenKey"
         case accessTokenExpiration = "accessTokenExpirationKey"

@@ -8,8 +8,20 @@
 import Foundation
 import Combine
 
-final class FetchNewsFeedUseCase {
+protocol FetchNewsFeedUseCase {
+    func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error>
+}
+
+final class FetchNewsFeedUseCaseImpl: FetchNewsFeedUseCase {
     
+    private let repository: NewsFeedRepository
     
+    init(repository: NewsFeedRepository) {
+        self.repository = repository
+    }
+    
+    public func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error> {
+        return repository.fetchNewsFeed()
+    }
     
 }

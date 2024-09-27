@@ -13,27 +13,27 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         static let spacing: CGFloat = 12
     }
     
-    let posts: [Post] = [
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-        Post(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-    ]
+//    let posts: [NewsFeed] = [
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
+//    ]
     
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
@@ -96,7 +96,7 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
 extension NewsFeedCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return 20
     }
     
     
@@ -105,7 +105,7 @@ extension NewsFeedCollectionViewController {
             return UICollectionViewCell()
         }
         
-        cell.configure(with: posts[indexPath.row])
+//        cell.configure(with: posts[indexPath.row])
         
         return cell
     }

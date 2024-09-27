@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB252CA6E06E001BB6BF /* Post.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -17,8 +18,7 @@
 		1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965A92CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift */; };
 		1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965AB2CA3FDC6004D752E /* AuthenticationRepository.swift */; };
 		1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965AD2CA41C48004D752E /* LoginRouter.swift */; };
-		1FF965B02CA41CF4004D752E /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965AF2CA41CF4004D752E /* UseCase.swift */; };
-		1FF965B22CA42242004D752E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B12CA42242004D752E /* Post.swift */; };
+		1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B12CA42242004D752E /* NewsFeed.swift */; };
 		1FF965B42CA42247004D752E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B32CA42247004D752E /* User.swift */; };
 		1FF965B62CA42291004D752E /* FetchNewsFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */; };
 		1FF965B82CA4229D004D752E /* LikePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B72CA4229D004D752E /* LikePostUseCase.swift */; };
@@ -49,10 +49,11 @@
 		1FF965FE2CA5B80A004D752E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FD2CA5B80A004D752E /* UIViewController.swift */; };
 		1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */; };
 		1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966012CA5C766004D752E /* KeychainKeys.swift */; };
-		1FF966052CA5CD94004D752E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966042CA5CD94004D752E /* KeychainManager.swift */; };
+		1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966042CA5CD94004D752E /* KeychainService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F9DDB252CA6E06E001BB6BF /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,8 +66,7 @@
 		1FF965A92CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryImpl.swift; sourceTree = "<group>"; };
 		1FF965AB2CA3FDC6004D752E /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		1FF965AD2CA41C48004D752E /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		1FF965AF2CA41CF4004D752E /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
-		1FF965B12CA42242004D752E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1FF965B12CA42242004D752E /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		1FF965B32CA42247004D752E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchNewsFeedUseCase.swift; sourceTree = "<group>"; };
 		1FF965B72CA4229D004D752E /* LikePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePostUseCase.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		1FF965FD2CA5B80A004D752E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStorage.swift; sourceTree = "<group>"; };
 		1FF966012CA5C766004D752E /* KeychainKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
-		1FF966042CA5CD94004D752E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		1FF966042CA5CD94004D752E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +203,7 @@
 			children = (
 				1FF965A22CA3F99C004D752E /* Network */,
 				1FF965A12CA3F990004D752E /* Storages */,
-				1FF966032CA5CD86004D752E /* Managers */,
+				1FF966032CA5CD86004D752E /* Services */,
 				1FF965A02CA3F979004D752E /* Repositories */,
 			);
 			path = Data;
@@ -232,8 +232,8 @@
 		1FF965992CA3F8BB004D752E /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				1FF965E82CA55B21004D752E /* Configurations */,
 				1FF965842CA3F7B6004D752E /* Info.plist */,
+				1FF965E82CA55B21004D752E /* Configurations */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -251,7 +251,6 @@
 		1FF9659B2CA3F938004D752E /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				1FF965AF2CA41CF4004D752E /* UseCase.swift */,
 				1FF965A72CA3FD81004D752E /* AuthenticationUseCase.swift */,
 				1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */,
 				1FF965B72CA4229D004D752E /* LikePostUseCase.swift */,
@@ -263,7 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				1FF965B32CA42247004D752E /* User.swift */,
-				1FF965B12CA42242004D752E /* Post.swift */,
+				1FF965B12CA42242004D752E /* NewsFeed.swift */,
+				1F9DDB252CA6E06E001BB6BF /* Post.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -360,12 +360,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1FF966032CA5CD86004D752E /* Managers */ = {
+		1FF966032CA5CD86004D752E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1FF966042CA5CD94004D752E /* KeychainManager.swift */,
+				1FF966042CA5CD94004D752E /* KeychainService.swift */,
 			);
-			path = Managers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,13 +460,12 @@
 				1FF9658E2CA3F7B6004D752E /* SceneDelegate.swift in Sources */,
 				1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */,
 				1FF965A42CA3FD62004D752E /* LoginViewModel.swift in Sources */,
-				1FF966052CA5CD94004D752E /* KeychainManager.swift in Sources */,
+				1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */,
 				1FF965A82CA3FD81004D752E /* AuthenticationUseCase.swift in Sources */,
 				1FF965C72CA4234B004D752E /* VKError.swift in Sources */,
 				1FF965B82CA4229D004D752E /* LikePostUseCase.swift in Sources */,
 				1FF965BC2CA422C4004D752E /* PostDetailsRepository.swift in Sources */,
 				1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */,
-				1FF965B02CA41CF4004D752E /* UseCase.swift in Sources */,
 				1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */,
 				1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */,
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
@@ -478,7 +477,8 @@
 				1FF965F12CA56449004D752E /* UICollectionView+Ext.swift in Sources */,
 				1FF965F52CA57C80004D752E /* UIFont+Ext.swift in Sources */,
 				1FF965EF2CA562D9004D752E /* GlobalConstants.swift in Sources */,
-				1FF965B22CA42242004D752E /* Post.swift in Sources */,
+				1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */,
+				1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */,
 				1FF965BF2CA422E1004D752E /* API.swift in Sources */,
 				1FF965C52CA42327004D752E /* PostDetailsRepositoryImpl.swift in Sources */,
 				1FF965CE2CA425B6004D752E /* NewsFeedRouter.swift in Sources */,
@@ -508,6 +508,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7BA72396CU;
@@ -539,6 +540,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7BA72396CU;

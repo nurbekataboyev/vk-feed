@@ -34,17 +34,20 @@ final class LoginViewController: UIViewController {
         let webView = WKWebView(frame: view.bounds)
         webView.navigationDelegate = self
         
-        var urlComponents = URLComponents()
-        urlComponents.scheme = VKAuthAPI.scheme
-        urlComponents.host = VKAuthAPI.host
-        urlComponents.path = VKAuthAPI.path
+        let request = API.Request(
+            scheme: VKAuthAPI.scheme,
+            host: VKAuthAPI.host,
+            path: VKAuthAPI.Paths.authorize.rawValue,
+            method: .POST,
+            parameters: VKAuthAPI.Paths.authorize.parameters())
+            .createURLRequest()
         
-        urlComponents.queryItems = VKAuthAPI.Parameters.toQueryItems()
-        
-        if let url = urlComponents.url {
-            let request = URLRequest(url: url)
-            webView.load(request)
+        guard let request else {
+            presentAlert(message: VKError.Network.invalidURL.localizedDescription)
+            return webView
         }
+        
+        webView.load(request)
         
         return webView
     }
@@ -62,14 +65,14 @@ extension LoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping @MainActor (WKNavigationResponsePolicy) -> Void) {
         
         guard let url = navigationResponse.response.url,
-              url.path() == VKAuthAPI.redirectPath,
+              url.path() == VKAuthAPI.Paths.redirect.rawValue,
               let fragment = url.fragment else {
             decisionHandler(.allow)
             return
         }
         
         guard let accessToken = getAccessToken(from: fragment) else {
-            presentAlert()
+            presentAlert(message: VKError.Login.loginFailed.localizedDescription)
             return
         }
         
