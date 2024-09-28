@@ -51,7 +51,7 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     public func fetchNewsFeed() {
         isLoading = true
         
-        fetchNewsFeedUseCase.fetchNewsFeed()
+        fetchNewsFeedUseCase.fetchNewsFeed(startFrom: newsFeed.response?.nextFrom)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -64,9 +64,36 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
                 
             } receiveValue: { [weak self] newsFeed in
                 guard let self else { return }
-                self.newsFeed = newsFeed
+                updateNewsFeed(newsFeed)
             }
             .store(in: &cancellables)
+    }
+    
+}
+
+
+extension NewsFeedViewModelImpl {
+    
+    private func updateNewsFeed(_ newsFeed: NewsFeed) {
+        if self.newsFeed.response == nil {
+            self.newsFeed = newsFeed
+        } else {
+            let fetchedItems = newsFeed.response?.items ?? []
+            let fetchedGroups = newsFeed.response?.groups ?? []
+            let fetchedNextFrom = newsFeed.response?.nextFrom
+            let existingGroups = self.newsFeed.response?.groups ?? []
+            
+            let newGroups = fetchedGroups.filter { group in
+                !existingGroups.contains(where: { $0.id == group.id })
+            }
+            
+            var updatedNewsFeed = self.newsFeed
+            updatedNewsFeed.response?.items.append(contentsOf: fetchedItems)
+            updatedNewsFeed.response?.groups.append(contentsOf: newGroups)
+            updatedNewsFeed.response?.nextFrom = fetchedNextFrom
+            
+            self.newsFeed = updatedNewsFeed
+        }
     }
     
 }

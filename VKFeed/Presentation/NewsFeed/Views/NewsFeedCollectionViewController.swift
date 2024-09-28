@@ -7,33 +7,19 @@
 
 import UIKit
 
+protocol NewsFeedCollectionDelegate: AnyObject {
+    func didScrollToBottom()
+    func didSelectPost(_ post: Post)
+}
+
 final class NewsFeedCollectionViewController: UICollectionViewController {
     
     private struct Constants {
         static let spacing: CGFloat = 12
     }
     
-//    let posts: [NewsFeed] = [
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "В качестве тестового задания было предложено создать мобильный клиент для социальной сети VK. Мы не ограничивали кандидатов в выборе стека технологий, предоставляя возможность использовать любые современные подходы и инструменты для написания кода. Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//        NewsFeed(id: UUID().uuidString, authorName: "Author", authorAvatarURL: "url", createdAt: Date(), text: "Единственным исключением был язык программирования Swift, который мы используем на нашем проекте."),
-//    ]
+    public weak var delegate: NewsFeedCollectionDelegate?
+    public var posts: [Post] = [] { didSet { collectionView.reloadData() } }
     
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
@@ -49,7 +35,7 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
     private func setupViews() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: setupLayout())
         collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = true
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInset = .init(top: Constants.spacing, left: 0, bottom: 100, right: 0)
         
         collectionView.register(PostCell.self, forCellWithReuseIdentifier: PostCell.reuseIdentifier)
@@ -96,7 +82,7 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
 extension NewsFeedCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return posts.count
     }
     
     
@@ -105,9 +91,26 @@ extension NewsFeedCollectionViewController {
             return UICollectionViewCell()
         }
         
-//        cell.configure(with: posts[indexPath.row])
+        let post = posts[indexPath.row]
+        cell.configure(with: post)
         
         return cell
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let lastRow = posts.count - 1
+        let lastIndex = IndexPath(row: lastRow, section: 0)
+        
+        if lastIndex == indexPath {
+            delegate?.didScrollToBottom()
+        }
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedPost = posts[indexPath.row]
+        delegate?.didSelectPost(selectedPost)
     }
     
 }

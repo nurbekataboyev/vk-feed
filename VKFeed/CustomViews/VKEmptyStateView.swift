@@ -1,54 +1,60 @@
 //
-//  VKLoadingView.swift
+//  VKEmptyStateView.swift
 //  VKFeed
 //
-//  Created by Nurbek on 27/09/24.
+//  Created by Nurbek on 28/09/24.
 //
 
 import UIKit
+import SnapKit
 
-final class VKLoadingView: UIView {
+final class VKEmptyStateView: UIView {
     
     private let viewController: UIViewController
     
-    private var activityIndicator = UIActivityIndicatorView(style: .large)
+    private var imageView = VKImageView(contentMode: .scaleAspectFill)
     
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init(frame: viewController.view.bounds)
         
         setupViews()
+        layout()
     }
     
     
     private func setupViews() {
-        addSubview(activityIndicator)
+        addSubview(imageView)
         
         backgroundColor = .systemBackground
         alpha = 0
-        
-        activityIndicator.color = .vkPrimary
-        activityIndicator.center = center
     }
     
     
-    public func showLoadingView() {
-        viewController.view.addSubview(self)
-        
-        activityIndicator.startAnimating()
-        
-        UIView.animate(withDuration: GlobalConstants.AnimationDuration.short) { [weak self] in
-            guard let self else { return }
-            alpha = 0.75
+    private func layout() {
+        imageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.equalTo(100)
         }
     }
     
     
-    public func dismissLoadingView() {
+    public func showEmptyState(with image: UIImage?, color: UIColor? = .vkPrimary) {
+        viewController.view.addSubview(self)
+        
+        imageView.image = image
+        imageView.tintColor = color
+        
+        UIView.animate(withDuration: GlobalConstants.AnimationDuration.short) { [weak self] in
+            guard let self else { return }
+            alpha = 1
+        }
+    }
+    
+    
+    public func dismissEmptyState() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            
-            activityIndicator.stopAnimating()
             removeFromSuperview()
         }
     }

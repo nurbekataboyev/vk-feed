@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB252CA6E06E001BB6BF /* Post.swift */; };
 		1F9DDB282CA71CEF001BB6BF /* VKLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */; };
+		1F9DDB2B2CA7DD53001BB6BF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1F9DDB2A2CA7DD53001BB6BF /* Kingfisher */; };
+		1F9DDB2D2CA7DD9F001BB6BF /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB2C2CA7DD9F001BB6BF /* UIImageView+Ext.swift */; };
+		1F9DDB2F2CA7E1C7001BB6BF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */; };
+		1F9DDB312CA7E580001BB6BF /* VKEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -56,6 +60,9 @@
 /* Begin PBXFileReference section */
 		1F9DDB252CA6E06E001BB6BF /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoadingView.swift; sourceTree = "<group>"; };
+		1F9DDB2C2CA7DD9F001BB6BF /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKEmptyStateView.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9DDB2B2CA7DD53001BB6BF /* Kingfisher in Frameworks */,
 				1FF965D72CA4261B004D752E /* Swinject in Frameworks */,
 				1FF965DA2CA42624004D752E /* SnapKit in Frameworks */,
 			);
@@ -186,8 +194,10 @@
 			children = (
 				1FF965FD2CA5B80A004D752E /* UIViewController.swift */,
 				1FF965F22CA57C00004D752E /* UIView+Ext.swift */,
+				1F9DDB2C2CA7DD9F001BB6BF /* UIImageView+Ext.swift */,
 				1FF965F02CA56449004D752E /* UICollectionView+Ext.swift */,
 				1FF965F42CA57C80004D752E /* UIFont+Ext.swift */,
+				1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +352,7 @@
 				1FF965F62CA57CD1004D752E /* VKLabel.swift */,
 				1FF965F82CA57CFB004D752E /* VKImageView.swift */,
 				1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */,
+				1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -390,6 +401,7 @@
 			packageProductDependencies = (
 				1FF965D62CA4261B004D752E /* Swinject */,
 				1FF965D92CA42624004D752E /* SnapKit */,
+				1F9DDB2A2CA7DD53001BB6BF /* Kingfisher */,
 			);
 			productName = VKFeed;
 			productReference = 1FF9656A2CA3F637004D752E /* VKFeed.app */;
@@ -422,6 +434,7 @@
 			packageReferences = (
 				1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */,
 				1FF965D82CA42624004D752E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1F9DDB292CA7DD53001BB6BF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1FF9656B2CA3F637004D752E /* Products */;
@@ -465,7 +478,9 @@
 				1FF965A42CA3FD62004D752E /* LoginViewModel.swift in Sources */,
 				1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */,
 				1FF965A82CA3FD81004D752E /* AuthenticationUseCase.swift in Sources */,
+				1F9DDB2D2CA7DD9F001BB6BF /* UIImageView+Ext.swift in Sources */,
 				1FF965C72CA4234B004D752E /* VKError.swift in Sources */,
+				1F9DDB312CA7E580001BB6BF /* VKEmptyStateView.swift in Sources */,
 				1FF965B82CA4229D004D752E /* LikePostUseCase.swift in Sources */,
 				1FF965BC2CA422C4004D752E /* PostDetailsRepository.swift in Sources */,
 				1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */,
@@ -482,6 +497,7 @@
 				1FF965F52CA57C80004D752E /* UIFont+Ext.swift in Sources */,
 				1FF965EF2CA562D9004D752E /* GlobalConstants.swift in Sources */,
 				1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */,
+				1F9DDB2F2CA7E1C7001BB6BF /* Date+Ext.swift in Sources */,
 				1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */,
 				1FF965BF2CA422E1004D752E /* API.swift in Sources */,
 				1FF965C52CA42327004D752E /* PostDetailsRepositoryImpl.swift in Sources */,
@@ -714,6 +730,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F9DDB292CA7DD53001BB6BF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
 		1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -733,6 +757,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F9DDB2A2CA7DD53001BB6BF /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F9DDB292CA7DD53001BB6BF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		1FF965D62CA4261B004D752E /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */;
