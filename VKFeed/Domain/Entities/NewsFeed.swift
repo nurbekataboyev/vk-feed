@@ -8,36 +8,13 @@
 import Foundation
 
 struct NewsFeed: Decodable {
-    let response: NewsFeedResponse?
-}
-
-extension NewsFeedItem {
-    
-    public func toPost(groups: [NewsFeedGroup]) -> Post {
-        var owner: PostOwner? = nil
-        
-        if let postOwner = groups.first(where: { $0.id == abs(sourceID) }) {
-            owner = PostOwner(id: postOwner.id, name: postOwner.name, photoURL: postOwner.photoURL)
-        }
-        
-        let post = Post(
-            postID: postID,
-            text: text,
-            photosURLs: attachments.map { $0.photo?.photo.url },
-            likesCount: likes.count,
-            userLikes: likes.userLikes == 1,
-            createdAt: Date(timeIntervalSince1970: TimeInterval(date)),
-            owner: owner)
-        
-        return post
-    }
-    
+    var response: NewsFeedResponse?
 }
 
 struct NewsFeedResponse: Decodable {
-    let items: [NewsFeedItem]
-    let groups: [NewsFeedGroup]
-    let nextFrom: String
+    var items: [NewsFeedItem]
+    var groups: [NewsFeedGroup]
+    var nextFrom: String?
     
     enum CodingKeys: String, CodingKey {
         case items, groups
@@ -58,6 +35,29 @@ struct NewsFeedItem: Decodable {
         case postID = "post_id"
         case date, text, attachments, likes
     }
+}
+
+extension NewsFeedItem {
+    
+    public func toPost(groups: [NewsFeedGroup]) -> Post {
+        var author: PostAuthor? = nil
+        
+        if let postAuthor = groups.first(where: { $0.id == abs(sourceID) }) {
+            author = PostAuthor(id: postAuthor.id, name: postAuthor.name, photoURL: postAuthor.photoURL)
+        }
+        
+        let post = Post(
+            postID: postID,
+            text: text,
+            photoURL: attachments.first?.photo?.photo.url,
+            likesCount: likes.count,
+            userLikes: likes.userLikes == 1,
+            createdAt: Date(timeIntervalSince1970: TimeInterval(date)),
+            author: author)
+        
+        return post
+    }
+    
 }
 
 struct NewsFeedAttachment: Decodable {

@@ -101,7 +101,7 @@ struct VKAPI {
 
 extension VKAPI.Paths {
     
-    public func parameters(withAccessToken accessToken: String) -> [String: String]? {
+    public func parameters(withAccessToken accessToken: String) -> [String: String] {
         switch self {
         case .usersGet:
             let params = [
@@ -115,11 +115,12 @@ extension VKAPI.Paths {
             let params = [
                 "access_token": accessToken,
                 "filters": "post",
-                "count": "10",
+                "count": "50",
                 "v": "5.131"
             ]
             
             return params
+            
         case .likesAdd:
             let params = [
                 "access_token": accessToken,
@@ -127,6 +128,7 @@ extension VKAPI.Paths {
             ]
             
             return params
+            
         case .likesDelete:
             let params = [
                 "access_token": accessToken,

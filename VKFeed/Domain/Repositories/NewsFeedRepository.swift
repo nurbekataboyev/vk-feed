@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol NewsFeedRepository {
-    func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error>
+    func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, Error>
 }

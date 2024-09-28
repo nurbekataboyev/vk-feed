@@ -16,6 +16,7 @@ final class NewsFeedViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private var collectionView = NewsFeedCollectionViewController()
+    private lazy var emptyStateView = VKEmptyStateView(viewController: self)
     private lazy var loadingView = VKLoadingView(viewController: self)
     
     init(viewModel: NewsFeedViewModel) {
@@ -38,10 +39,9 @@ final class NewsFeedViewController: UIViewController {
         viewModel.newsFeedPublisher
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink { newsFeed in
-                
-                print(newsFeed)
-                
+            .sink { [weak self] newsFeed in
+                guard let self else { return }
+                updateNewsFeed(newsFeed)
             }
             .store(in: &cancellables)
         
@@ -68,12 +68,32 @@ final class NewsFeedViewController: UIViewController {
     }
     
     
+    private func updateNewsFeed(_ newsFeed: NewsFeed) {
+        guard let response = newsFeed.response else {
+            updateEmptyStateView(isEmpty: true)
+            return
+        }
+        
+        let isEmpty = response.items.isEmpty
+        updateEmptyStateView(isEmpty: isEmpty)
+        
+        if !isEmpty {
+            let groups = response.groups
+            let posts = response.items.map { $0.toPost(groups: groups) }
+            
+            collectionView.posts = posts
+        }
+    }
+    
+    
     private func setupViews() {
         view.backgroundColor = .secondarySystemBackground
         
         navigationItem.title = "News Feed"
         
         view.addSubview(collectionView.collectionView)
+        
+        collectionView.delegate = self
     }
     
     
@@ -86,6 +106,30 @@ final class NewsFeedViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+
+extension NewsFeedViewController {
+    
+    private func updateEmptyStateView(isEmpty: Bool) {
+        let emptyStateImage = UIImage(systemName: "doc.text.magnifyingglass")
+        isEmpty ? emptyStateView.showEmptyState(with: emptyStateImage) : emptyStateView.dismissEmptyState()
+    }
+    
+}
+
+
+extension NewsFeedViewController: NewsFeedCollectionDelegate {
+    
+    func didScrollToBottom() {
+        viewModel.fetchNewsFeed()
+    }
+    
+    
+    func didSelectPost(_ post: Post) {
+        print(#function, post)
     }
     
 }

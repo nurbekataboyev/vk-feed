@@ -10,14 +10,14 @@ import Foundation
 struct Post {
     let postID: Int
     let text: String
-    let photosURLs: [String?]
+    let photoURL: String?
     let likesCount: Int
     let userLikes: Bool
     let createdAt: Date
-    let owner: PostOwner?
+    let author: PostAuthor?
 }
 
-struct PostOwner {
+struct PostAuthor {
     let id: Int
     let name: String
     let photoURL: String

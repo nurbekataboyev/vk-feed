@@ -19,15 +19,18 @@ final class PostCell: UICollectionViewCell {
     private var authorNameLabel = VKLabel(style: .headline, weight: .semibold)
     private var postDateLabel = VKLabel(style: .footnote, color: .secondaryLabel)
     private var postTextLabel = VKLabel(style: .subheadline)
+    private var postImageView = VKImageView(contentMode: .scaleAspectFill)
     
-    public func configure(with post: NewsFeed) {
-        authorAvatarImageView.backgroundColor = .blue
+    public func configure(with post: Post) {
+        authorAvatarImageView.setImage(from: post.author?.photoURL, placeholder: .profileImagePlaceholder)
         
-//        authorNameLabel.text = post.authorName
-//        
-//        postDateLabel.text = post.createdAt.ISO8601Format()
-//        
-//        postTextLabel.text = post.text
+        authorNameLabel.text = post.author?.name
+        
+        postDateLabel.text = post.createdAt.toPostDateFormat()
+        
+        postTextLabel.text = post.text
+        
+        postImageView.setImage(from: post.photoURL, placeholder: .postPlaceholder)
         
         layout()
     }
@@ -44,12 +47,15 @@ final class PostCell: UICollectionViewCell {
         layer.cornerRadius = GlobalConstants.CornerRadius.medium
         addShadow()
         
-        addSubviews(authorAvatarImageView, authorNameLabel, postDateLabel, postTextLabel)
+        addSubviews(authorAvatarImageView, authorNameLabel, postDateLabel, postTextLabel, postImageView)
         
         authorAvatarImageView.layer.cornerRadius = Constans.avatarSize / 2
         authorAvatarImageView.clipsToBounds = true
         
         postTextLabel.numberOfLines = .max
+        
+        postImageView.layer.cornerRadius = GlobalConstants.CornerRadius.small
+        postImageView.clipsToBounds = true
     }
     
     
@@ -74,7 +80,14 @@ final class PostCell: UICollectionViewCell {
         postTextLabel.snp.makeConstraints {
             $0.top.equalTo(authorAvatarImageView.snp.bottom).offset(GlobalConstants.Padding.small)
             $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
+            
+        }
+        
+        postImageView.snp.makeConstraints {
+            $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
+            $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
             $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
+            $0.height.equalTo(postImageView.snp.width)
         }
     }
     

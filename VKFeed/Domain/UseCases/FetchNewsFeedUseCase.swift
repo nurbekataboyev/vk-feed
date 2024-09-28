@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FetchNewsFeedUseCase {
-    func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error>
+    func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, Error>
 }
 
 final class FetchNewsFeedUseCaseImpl: FetchNewsFeedUseCase {
@@ -20,8 +20,8 @@ final class FetchNewsFeedUseCaseImpl: FetchNewsFeedUseCase {
         self.repository = repository
     }
     
-    public func fetchNewsFeed() -> AnyPublisher<NewsFeed, Error> {
-        return repository.fetchNewsFeed()
+    public func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, Error> {
+        return repository.fetchNewsFeed(startFrom: startFrom)
     }
     
 }
