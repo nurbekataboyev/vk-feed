@@ -9,6 +9,7 @@ import UIKit
 
 protocol LoginRouter {
     static func configure() -> UIViewController
+    
     func navigateToNewsFeed()
 }
 

@@ -9,17 +9,19 @@ import UIKit
 
 protocol NewsFeedCollectionDelegate: AnyObject {
     func didScrollToBottom()
-    func didSelectPost(_ post: Post)
+    func didTapPost(_ post: Post)
 }
 
 final class NewsFeedCollectionViewController: UICollectionViewController {
     
     private struct Constants {
+        static let estimatedCellHeight: CGFloat = 50
         static let spacing: CGFloat = 12
     }
     
     public weak var delegate: NewsFeedCollectionDelegate?
     public var posts: [Post] = [] { didSet { collectionView.reloadData() } }
+    public var shouldScrollToTop: Bool = false { didSet { scrollToTop() } }
     
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
@@ -56,12 +58,12 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
     private func setupPostLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(50))
+            heightDimension: .estimated(Constants.estimatedCellHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(1))
+            heightDimension: .estimated(Constants.estimatedCellHeight))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -69,6 +71,14 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         section.interGroupSpacing = Constants.spacing
         
         return section
+    }
+    
+    
+    private func scrollToTop() {
+        if posts.count > 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
     
     
@@ -92,7 +102,7 @@ extension NewsFeedCollectionViewController {
         }
         
         let post = posts[indexPath.row]
-        cell.configure(with: post)
+        cell.setup(with: post)
         
         return cell
     }
@@ -110,7 +120,7 @@ extension NewsFeedCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedPost = posts[indexPath.row]
-        delegate?.didSelectPost(selectedPost)
+        delegate?.didTapPost(selectedPost)
     }
     
 }
