@@ -14,7 +14,8 @@ protocol NewsFeedViewModel {
     var errorMessagePublisher: AnyPublisher<String?, Never> { get }
     
     func viewDidLoad()
-    func fetchNewsFeed()
+    func fetchNewsFeed(shouldRefresh: Bool)
+    func presentPostDetails(_ post: Post)
 }
 
 final class NewsFeedViewModelImpl: NewsFeedViewModel {
@@ -38,9 +39,12 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     private let fetchNewsFeedUseCase: FetchNewsFeedUseCase
+    private let router: NewsFeedRouter
     
-    init(fetchNewsFeedUseCase: FetchNewsFeedUseCase) {
+    init(fetchNewsFeedUseCase: FetchNewsFeedUseCase,
+         router: NewsFeedRouter) {
         self.fetchNewsFeedUseCase = fetchNewsFeedUseCase
+        self.router = router
     }
     
     public func viewDidLoad() {
@@ -48,8 +52,10 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     }
     
     
-    public func fetchNewsFeed() {
+    public func fetchNewsFeed(shouldRefresh: Bool = false) {
         isLoading = true
+        
+        if shouldRefresh { newsFeed.response?.nextFrom = nil }
         
         fetchNewsFeedUseCase.fetchNewsFeed(startFrom: newsFeed.response?.nextFrom)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
@@ -64,9 +70,14 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
                 
             } receiveValue: { [weak self] newsFeed in
                 guard let self else { return }
-                updateNewsFeed(newsFeed)
+                updateNewsFeed(newsFeed, shouldRefresh: shouldRefresh)
             }
             .store(in: &cancellables)
+    }
+    
+    
+    public func presentPostDetails(_ post: Post) {
+        router.presentPostDetails(post)
     }
     
 }
@@ -74,7 +85,12 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
 
 extension NewsFeedViewModelImpl {
     
-    private func updateNewsFeed(_ newsFeed: NewsFeed) {
+    private func updateNewsFeed(_ newsFeed: NewsFeed, shouldRefresh: Bool) {
+        guard !shouldRefresh else {
+            self.newsFeed = newsFeed
+            return
+        }
+        
         if self.newsFeed.response == nil {
             self.newsFeed = newsFeed
         } else {

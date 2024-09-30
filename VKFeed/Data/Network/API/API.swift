@@ -73,7 +73,7 @@ extension VKAuthAPI.Paths {
                 "client_id": VKConfig.clientID,
                 "redirect_uri": "https://oauth.vk.com/blank.html",
                 "display": "mobile",
-                "scope": "friends,wall",
+                "scope": "wall,friends,offline",
                 "response_type": "token"
             ]
             

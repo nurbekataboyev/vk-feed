@@ -91,6 +91,11 @@ final class NewsFeedViewController: UIViewController {
         
         navigationItem.title = "News Feed"
         
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshNewsFeedHandler))
+        let scrollToTopButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up"), style: .plain, target: self, action: #selector(scrollToTopHandler))
+        navigationItem.leftBarButtonItem = refreshButton
+        navigationItem.rightBarButtonItem = scrollToTopButton
+        
         view.addSubview(collectionView.collectionView)
         
         collectionView.delegate = self
@@ -113,6 +118,26 @@ final class NewsFeedViewController: UIViewController {
 
 extension NewsFeedViewController {
     
+    @objc func refreshNewsFeedHandler() {
+        refreshNews()
+    }
+    
+    
+    @objc func scrollToTopHandler() {
+        collectionView.shouldScrollToTop = true
+    }
+    
+    
+    private func refreshNews() {
+        collectionView.shouldScrollToTop = true
+        viewModel.fetchNewsFeed(shouldRefresh: true)
+    }
+    
+}
+
+
+extension NewsFeedViewController {
+    
     private func updateEmptyStateView(isEmpty: Bool) {
         let emptyStateImage = UIImage(systemName: "doc.text.magnifyingglass")
         isEmpty ? emptyStateView.showEmptyState(with: emptyStateImage) : emptyStateView.dismissEmptyState()
@@ -124,12 +149,12 @@ extension NewsFeedViewController {
 extension NewsFeedViewController: NewsFeedCollectionDelegate {
     
     func didScrollToBottom() {
-        viewModel.fetchNewsFeed()
+        viewModel.fetchNewsFeed(shouldRefresh: false)
     }
     
     
-    func didSelectPost(_ post: Post) {
-        print(#function, post)
+    func didTapPost(_ post: Post) {
+        viewModel.presentPostDetails(post)
     }
     
 }

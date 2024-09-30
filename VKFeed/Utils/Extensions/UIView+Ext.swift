@@ -21,4 +21,10 @@ extension UIView {
         layer.shadowOffset = .zero
     }
     
+    
+    public func makeVibration(_ style: UIImpactFeedbackGenerator.FeedbackStyle = .soft) {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: style)
+        feedbackGenerator.impactOccurred()
+    }
+    
 }

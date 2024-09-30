@@ -11,10 +11,14 @@ struct Post {
     let postID: Int
     let text: String
     let photoURL: String?
-    let likesCount: Int
-    let userLikes: Bool
+    let likes: PostLikes
     let createdAt: Date
     let author: PostAuthor?
+}
+
+struct PostLikes {
+    var count: Int
+    var userLikes: Bool
 }
 
 struct PostAuthor {

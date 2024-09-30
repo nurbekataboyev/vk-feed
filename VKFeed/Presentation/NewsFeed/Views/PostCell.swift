@@ -21,7 +21,7 @@ final class PostCell: UICollectionViewCell {
     private var postTextLabel = VKLabel(style: .subheadline)
     private var postImageView = VKImageView(contentMode: .scaleAspectFill)
     
-    public func configure(with post: Post) {
+    public func setup(with post: Post) {
         authorAvatarImageView.setImage(from: post.author?.photoURL, placeholder: .profileImagePlaceholder)
         
         authorNameLabel.text = post.author?.name

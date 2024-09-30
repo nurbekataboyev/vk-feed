@@ -40,6 +40,7 @@ struct NewsFeedItem: Decodable {
 extension NewsFeedItem {
     
     public func toPost(groups: [NewsFeedGroup]) -> Post {
+        let likes = PostLikes(count: likes.count, userLikes: likes.userLikes == 1)
         var author: PostAuthor? = nil
         
         if let postAuthor = groups.first(where: { $0.id == abs(sourceID) }) {
@@ -50,8 +51,7 @@ extension NewsFeedItem {
             postID: postID,
             text: text,
             photoURL: attachments.first?.photo?.photo.url,
-            likesCount: likes.count,
-            userLikes: likes.userLikes == 1,
+            likes: likes,
             createdAt: Date(timeIntervalSince1970: TimeInterval(date)),
             author: author)
         
