@@ -10,7 +10,7 @@ import UIKit
 protocol LoginRouter {
     static func configure() -> UIViewController
     
-    func navigateToNewsFeed()
+    func setNewsFeed()
 }
 
 final class LoginRouterImpl: LoginRouter {
@@ -33,9 +33,9 @@ final class LoginRouterImpl: LoginRouter {
     }
     
     
-    public func navigateToNewsFeed() {
+    public func setNewsFeed() {
         let newsFeedViewController = NewsFeedRouterImpl.configure()
-        viewController?.navigationController?.setViewControllers([newsFeedViewController], animated: false)
+        viewController?.navigationController?.setViewControllers([newsFeedViewController], animated: true)
     }
     
 }

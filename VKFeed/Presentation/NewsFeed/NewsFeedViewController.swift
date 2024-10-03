@@ -89,12 +89,16 @@ final class NewsFeedViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .secondarySystemBackground
         
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "News Feed"
+        
+        let logoutButton = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutHandler))
+        logoutButton.tintColor = .systemRed
         
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshNewsFeedHandler))
         let scrollToTopButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up"), style: .plain, target: self, action: #selector(scrollToTopHandler))
-        navigationItem.leftBarButtonItem = refreshButton
-        navigationItem.rightBarButtonItem = scrollToTopButton
+        navigationItem.leftBarButtonItem = logoutButton
+        navigationItem.rightBarButtonItems = [refreshButton, scrollToTopButton]
         
         view.addSubview(collectionView.collectionView)
         
@@ -117,6 +121,20 @@ final class NewsFeedViewController: UIViewController {
 
 
 extension NewsFeedViewController {
+    
+    @objc func logoutHandler() {
+        let alert = UIAlertController(title: "Log Out?", message: "Dou you really want to log out?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let logoutAction = UIAlertAction(title: "Log Out", style: .destructive) { [weak self] _ in
+            guard let self else { return }
+            viewModel.logout()
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(logoutAction)
+        present(alert, animated: true)
+    }
+    
     
     @objc func refreshNewsFeedHandler() {
         refreshNews()

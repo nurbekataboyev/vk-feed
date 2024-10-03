@@ -26,15 +26,35 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
             path: VKIDAPI.Paths.oauth2Auth().rawValue,
             method: .POST,
             parameters: VKIDAPI.Paths.oauth2Auth(deviceID: deviceID, codeVerifier: codeVerifier).parameters(),
-            headers: VKIDAPI.Headers.contentTypeJSON,
-            body: API.Request.createBody(key: "code", value: code))
+            headers: VKIDAPI.Paths.oauth2Auth().headers(),
+            body: VKIDAPI.Paths.oauth2Auth(code: code).body())
+        
+        return apiService.fetchData(request: request)
+    }
+    
+    
+    public func invalidateAccessToken() -> AnyPublisher<TokenInvalidationResponse, Error> {
+        let accessToken = accessTokenStorage.getAccessToken()
+        
+        let request = API.Request(
+            scheme: VKIDAPI.scheme,
+            host: VKIDAPI.host,
+            path: VKIDAPI.Paths.oauth2Logout().rawValue,
+            method: .POST,
+            parameters: VKIDAPI.Paths.oauth2Logout().parameters(),
+            headers: VKIDAPI.Paths.oauth2Logout(accessToken: accessToken).headers())
         
         return apiService.fetchData(request: request)
     }
     
     
     public func saveAccessToken(_ token: String) {
-        accessTokenStorage.save(token)
+        accessTokenStorage.saveAccessToken(token)
+    }
+    
+    
+    public func clearAccessToken() {
+        accessTokenStorage.clearAccessToken()
     }
     
 }

@@ -102,7 +102,7 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
                 authenticationUseCase.saveAccessToken(authResponse.accessToken)
                 
                 DispatchQueue.main.async {
-                    self.router.navigateToNewsFeed()
+                    self.router.setNewsFeed()
                 }
             }
             .store(in: &cancellables)

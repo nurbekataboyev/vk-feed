@@ -28,3 +28,9 @@ struct AuthenticationResponse: Decodable {
         case userId = "user_id"
     }
 }
+
+struct TokenInvalidationResponse: Decodable {
+    let response: Int
+    
+    var isInvalidated: Bool { response == 1 }
+}

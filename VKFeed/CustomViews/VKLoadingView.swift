@@ -24,7 +24,7 @@ final class VKLoadingView: UIView {
     private func setupViews() {
         addSubview(activityIndicator)
         
-        backgroundColor = .systemBackground
+        backgroundColor = .secondarySystemBackground
         alpha = 0
         
         activityIndicator.color = .vkPrimary
