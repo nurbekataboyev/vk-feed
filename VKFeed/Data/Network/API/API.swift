@@ -15,7 +15,7 @@ struct API {
         let path: String
         let method: HTTPMethod
         var parameters: [String: String]? = nil
-        var headers: [HeaderField: String]? = nil
+        var headers: [String: String]? = nil
         var body: Data? = nil
     }
     
@@ -24,9 +24,9 @@ struct API {
         case POST = "POST"
     }
     
-    enum HeaderField: String {
-        case contentType = "Content-Type"
-        case authorization = "Authorization"
+    struct HeaderField {
+        static let contentType = "Content-Type"
+        static let authorization = "Authorization"
     }
     
     struct HeaderValue {
@@ -50,25 +50,16 @@ extension API.Request {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.setValue(API.HeaderValue.applicationJSON, forHTTPHeaderField: API.HeaderField.contentType.rawValue)
         
         if let headers {
             for (field, value) in headers {
-                request.setValue(value, forHTTPHeaderField: field.rawValue)
+                request.setValue(value, forHTTPHeaderField: field)
             }
         }
         
         if let body { request.httpBody = body }
         
         return request
-    }
-    
-    
-    static func createBody(key: String, value: Any?) -> Data? {
-        let jsonBody = [key: value]
-        let data = try? JSONSerialization.data(withJSONObject: jsonBody, options: [])
-        
-        return data
     }
     
 }
@@ -80,7 +71,8 @@ struct VKIDAPI {
     
     enum Paths {
         case authorize(codeChallenge: String? = nil)
-        case oauth2Auth(deviceID: String? = nil, codeVerifier: String? = nil)
+        case oauth2Auth(code: String? = nil, deviceID: String? = nil, codeVerifier: String? = nil)
+        case oauth2Logout(accessToken: String? = nil)
         
         var rawValue: String {
             switch self {
@@ -88,48 +80,88 @@ struct VKIDAPI {
                 return "/authorize"
             case .oauth2Auth:
                 return "/oauth2/auth"
+            case .oauth2Logout:
+                return "/oauth2/logout"
             }
         }
-    }
-    
-    struct Headers {
-        static let contentTypeJSON = [API.HeaderField.contentType: API.HeaderValue.applicationJSON]
     }
 }
 
 extension VKIDAPI.Paths {
     
+    public func headers() -> [String: String] {
+        var headers: [String: String] = [:]
+        
+        switch self {
+        case .authorize:
+            return headers
+            
+        case .oauth2Auth:
+            headers[API.HeaderField.contentType] = API.HeaderValue.applicationJSON
+            
+            return headers
+            
+        case .oauth2Logout(let accessToken):
+            if let accessToken {
+                headers[API.HeaderField.authorization] = "\(API.HeaderValue.bearerToken) \(accessToken)"
+            }
+            
+            return headers
+        }
+    }
+    
+    
+    public func body() -> Data? {
+        var body: [String: Any] = [:]
+        
+        switch self {
+        case .authorize:
+            return nil
+            
+        case .oauth2Auth(let code, _, _):
+            body["code"] = code
+            
+        case .oauth2Logout:
+            return nil
+        }
+        
+        let data = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        return data
+    }
+    
+    
     public func parameters() -> [String: String] {
+        var params: [String: String] = [
+            "client_id": VKConfig.clientID
+        ]
+        
         switch self {
         case .authorize(let codeChallenge):
-            var params = [
-                "state": "abracadabra",
-                "response_type": "code",
-                
-                "code_challenge_method": "s256",
-                "client_id": VKConfig.clientID,
-                "redirect_uri": VKConfig.redirectURI,
-                "prompt": "login",
-                "scope": "offline%wall%friends"
-            ]
+            params["state"] = "abracadabra"
+            params["response_type"] = "code"
+            params["code_challenge_method"] = "s256"
+            params["redirect_uri"] = VKConfig.redirectURI
+            params["prompt"] = "login"
+            params["scope"] = "offline%wall%friends"
             
             if let codeChallenge { params["code_challenge"] = codeChallenge }
             
             return params
             
-        case .oauth2Auth(let deviceID, let codeVerifier):
-            var params = [
-                "state": "abracadabracodeexchange",
-                "grant_type": "authorization_code",
-                "redirect_uri": VKConfig.redirectURI,
-                "client_id": VKConfig.clientID
-            ]
+        case .oauth2Auth(_, let deviceID, let codeVerifier):
+            params["state"] = "abracadabracodeexchange"
+            params["grant_type"] = "authorization_code"
+            params["redirect_uri"] = VKConfig.redirectURI
             
             if let deviceID, let codeVerifier {
                 params["device_id"] = deviceID
                 params["code_verifier"] = codeVerifier
             }
             
+            return params
+            
+        case .oauth2Logout:
             return params
         }
     }
@@ -141,11 +173,24 @@ struct VKAPI {
     static let scheme = "https"
     static let host = "api.vk.com"
     
-    enum Paths: String {
-        case usersGet = "/method/users.get"
-        case newsFeedGet = "/method/newsfeed.get"
-        case likesAdd = "/method/likes.add"
-        case likesDelete = "/method/likes.delete"
+    enum Paths {
+        case usersGet
+        case newsFeedGet(startFrom: String? = nil)
+        case likesAdd
+        case likesDelete
+        
+        var rawValue: String {
+            switch self {
+            case .usersGet:
+                return "/method/users.get"
+            case .newsFeedGet:
+                return "/method/newsfeed.get"
+            case .likesAdd:
+                return "/method/likes.add"
+            case .likesDelete:
+                return "/method/likes.delete"
+            }
+        }
     }
 }
 
@@ -161,9 +206,11 @@ extension VKAPI.Paths {
         case .usersGet:
             return params
             
-        case .newsFeedGet:
+        case .newsFeedGet(let startFrom):
             params["filters"] = "post"
             params["count"] = "50"
+            
+            if let startFrom { params["start_from"] = startFrom }
             
             return params
             

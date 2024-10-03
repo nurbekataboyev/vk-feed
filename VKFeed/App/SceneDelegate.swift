@@ -67,7 +67,7 @@ extension SceneDelegate {
         let keychainService = KeychainService()
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         
-        let isAccessTokenValid = accessTokenStorage.get() != nil
+        let isAccessTokenValid = accessTokenStorage.getAccessToken() != nil
         
         return isAccessTokenValid
     }

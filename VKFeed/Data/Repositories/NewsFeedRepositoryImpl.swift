@@ -20,22 +20,16 @@ final class NewsFeedRepositoryImpl: NewsFeedRepository {
     }
     
     public func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, any Error> {
-        guard let accessToken = accessTokenStorage.get() else {
+        guard let accessToken = accessTokenStorage.getAccessToken() else {
             return Fail(error: VKError.Token.invalidToken).eraseToAnyPublisher()
-        }
-        
-        var parameters = VKAPI.Paths.newsFeedGet.parameters(withAccessToken: accessToken)
-        
-        if let startFrom {
-            parameters["start_from"] = startFrom
         }
         
         let request = API.Request(
             scheme: VKAPI.scheme,
             host: VKAPI.host,
-            path: VKAPI.Paths.newsFeedGet.rawValue,
+            path: VKAPI.Paths.newsFeedGet().rawValue,
             method: .POST,
-            parameters: parameters)
+            parameters: VKAPI.Paths.newsFeedGet(startFrom: startFrom).parameters(withAccessToken: accessToken))
         
         return apiService.fetchData(request: request)
     }

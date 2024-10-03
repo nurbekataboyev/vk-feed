@@ -15,6 +15,9 @@ protocol NewsFeedViewModel {
     
     func viewDidLoad()
     func fetchNewsFeed(shouldRefresh: Bool)
+    
+    func logout()
+    
     func presentPostDetails(_ post: Post)
 }
 
@@ -22,6 +25,7 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     
     // internal
     private let fetchNewsFeedUseCase: FetchNewsFeedUseCase
+    private let logoutUseCase: LogoutUseCase
     private let router: NewsFeedRouter
     
     private var cancellables = Set<AnyCancellable>()
@@ -44,8 +48,10 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     }
     
     init(fetchNewsFeedUseCase: FetchNewsFeedUseCase,
+         logoutUseCase: LogoutUseCase,
          router: NewsFeedRouter) {
         self.fetchNewsFeedUseCase = fetchNewsFeedUseCase
+        self.logoutUseCase = logoutUseCase
         self.router = router
     }
     
@@ -74,6 +80,30 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
                 guard let self else { return }
                 updateNewsFeed(newsFeed, shouldRefresh: shouldRefresh)
             }
+            .store(in: &cancellables)
+    }
+    
+    
+    public func logout() {
+        isLoading = true
+        
+        logoutUseCase.logout()
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
+            .sink { [weak self] completion in
+                guard let self else { return }
+                
+                isLoading = false
+                
+                switch completion {
+                case .finished:
+                    DispatchQueue.main.async {
+                        self.router.setLogin()
+                    }
+                case .failure(let error):
+                    errorMessage = error.localizedDescription
+                }
+                
+            } receiveValue: { _ in }
             .store(in: &cancellables)
     }
     

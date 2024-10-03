@@ -26,7 +26,7 @@ final class VKEmptyStateView: UIView {
     private func setupViews() {
         addSubview(imageView)
         
-        backgroundColor = .systemBackground
+        backgroundColor = .secondarySystemBackground
         alpha = 0
     }
     

@@ -10,6 +10,7 @@ import UIKit
 protocol NewsFeedRouter {
     static func configure() -> UIViewController
     
+    func setLogin()
     func presentPostDetails(_ post: Post)
 }
 
@@ -23,13 +24,21 @@ final class NewsFeedRouterImpl: NewsFeedRouter {
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         let newsFeedRepository = NewsFeedRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
         let fetchNewsFeedUseCase = FetchNewsFeedUseCaseImpl(repository: newsFeedRepository)
+        let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
+        let logoutUseCase = LogoutUseCaseImpl(authenticationRepository: authenticationRepository)
         let router = NewsFeedRouterImpl()
-        let viewModel = NewsFeedViewModelImpl(fetchNewsFeedUseCase: fetchNewsFeedUseCase, router: router)
+        let viewModel = NewsFeedViewModelImpl(fetchNewsFeedUseCase: fetchNewsFeedUseCase, logoutUseCase: logoutUseCase, router: router)
         let newsFeed = NewsFeedViewController(viewModel: viewModel)
         
         router.viewController = newsFeed
         
         return newsFeed
+    }
+    
+    
+    public func setLogin() {
+        let login = LoginRouterImpl.configure()
+        viewController?.navigationController?.setViewControllers([login], animated: true)
     }
     
     
