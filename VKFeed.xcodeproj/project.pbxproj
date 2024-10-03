@@ -14,6 +14,10 @@
 		1F9DDB2F2CA7E1C7001BB6BF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */; };
 		1F9DDB312CA7E580001BB6BF /* VKEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */; };
 		1F9DDB552CA9922C001BB6BF /* PostLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB542CA9922C001BB6BF /* PostLikeView.swift */; };
+		1F9DDB572CABC8F0001BB6BF /* VKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB562CABC8F0001BB6BF /* VKButton.swift */; };
+		1F9DDB592CAE734A001BB6BF /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB582CAE734A001BB6BF /* AuthenticationHelper.swift */; };
+		1F9DDB5C2CAE8A77001BB6BF /* URL+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB5B2CAE8A77001BB6BF /* URL+ext.swift */; };
+		1F9DDB5F2CAEC41D001BB6BF /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB5E2CAEC41D001BB6BF /* Authentication.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -65,6 +69,10 @@
 		1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKEmptyStateView.swift; sourceTree = "<group>"; };
 		1F9DDB542CA9922C001BB6BF /* PostLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeView.swift; sourceTree = "<group>"; };
+		1F9DDB562CABC8F0001BB6BF /* VKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKButton.swift; sourceTree = "<group>"; };
+		1F9DDB582CAE734A001BB6BF /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
+		1F9DDB5B2CAE8A77001BB6BF /* URL+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ext.swift"; sourceTree = "<group>"; };
+		1F9DDB5E2CAEC41D001BB6BF /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,6 +139,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1F9DDB5A2CAE73A2001BB6BF /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1FF965EE2CA562D9004D752E /* GlobalConstants.swift */,
+				1FF966012CA5C766004D752E /* KeychainKeys.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		1FF965612CA3F637004D752E = {
 			isa = PBXGroup;
 			children = (
@@ -193,8 +210,8 @@
 		1FF965932CA3F806004D752E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1FF965EE2CA562D9004D752E /* GlobalConstants.swift */,
-				1FF966012CA5C766004D752E /* KeychainKeys.swift */,
+				1F9DDB582CAE734A001BB6BF /* AuthenticationHelper.swift */,
+				1F9DDB5A2CAE73A2001BB6BF /* Constants */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,6 +225,7 @@
 				1FF965F02CA56449004D752E /* UICollectionView+Ext.swift */,
 				1FF965F42CA57C80004D752E /* UIFont+Ext.swift */,
 				1F9DDB2E2CA7E1C7001BB6BF /* Date+Ext.swift */,
+				1F9DDB5B2CAE8A77001BB6BF /* URL+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +301,7 @@
 		1FF9659C2CA3F93D004D752E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				1F9DDB5E2CAEC41D001BB6BF /* Authentication.swift */,
 				1FF965B32CA42247004D752E /* User.swift */,
 				1FF965B12CA42242004D752E /* NewsFeed.swift */,
 				1F9DDB252CA6E06E001BB6BF /* Post.swift */,
@@ -361,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965F62CA57CD1004D752E /* VKLabel.swift */,
+				1F9DDB562CABC8F0001BB6BF /* VKButton.swift */,
 				1FF965F82CA57CFB004D752E /* VKImageView.swift */,
 				1F9DDB272CA71CEF001BB6BF /* VKLoadingView.swift */,
 				1F9DDB302CA7E580001BB6BF /* VKEmptyStateView.swift */,
@@ -483,6 +503,7 @@
 				1FF965B62CA42291004D752E /* FetchNewsFeedUseCase.swift in Sources */,
 				1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */,
 				1FF965D22CA425C7004D752E /* PostDetailsViewModel.swift in Sources */,
+				1F9DDB572CABC8F0001BB6BF /* VKButton.swift in Sources */,
 				1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */,
 				1FF9658E2CA3F7B6004D752E /* SceneDelegate.swift in Sources */,
 				1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */,
@@ -513,11 +534,14 @@
 				1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */,
 				1FF965BF2CA422E1004D752E /* API.swift in Sources */,
 				1FF965C52CA42327004D752E /* PostRepositoryImpl.swift in Sources */,
+				1F9DDB5C2CAE8A77001BB6BF /* URL+ext.swift in Sources */,
 				1FF965CE2CA425B6004D752E /* NewsFeedRouter.swift in Sources */,
+				1F9DDB592CAE734A001BB6BF /* AuthenticationHelper.swift in Sources */,
 				1FF965D02CA425BE004D752E /* PostDetailsViewController.swift in Sources */,
 				1FF965B42CA42247004D752E /* User.swift in Sources */,
 				1FF965F92CA57CFB004D752E /* VKImageView.swift in Sources */,
 				1FF965CA2CA425A8004D752E /* NewsFeedViewController.swift in Sources */,
+				1F9DDB5F2CAEC41D001BB6BF /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

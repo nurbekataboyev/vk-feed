@@ -20,10 +20,17 @@ protocol NewsFeedViewModel {
 
 final class NewsFeedViewModelImpl: NewsFeedViewModel {
     
+    // internal
+    private let fetchNewsFeedUseCase: FetchNewsFeedUseCase
+    private let router: NewsFeedRouter
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     @Published private var newsFeed: NewsFeed = NewsFeed(response: nil)
     @Published private var isLoading: Bool = false
     @Published private var errorMessage: String? = nil
     
+    // external
     public var newsFeedPublisher: AnyPublisher<NewsFeed, Never> {
         return $newsFeed.eraseToAnyPublisher()
     }
@@ -35,11 +42,6 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     public var errorMessagePublisher: AnyPublisher<String?, Never> {
         return $errorMessage.eraseToAnyPublisher()
     }
-    
-    private var cancellables = Set<AnyCancellable>()
-    
-    private let fetchNewsFeedUseCase: FetchNewsFeedUseCase
-    private let router: NewsFeedRouter
     
     init(fetchNewsFeedUseCase: FetchNewsFeedUseCase,
          router: NewsFeedRouter) {

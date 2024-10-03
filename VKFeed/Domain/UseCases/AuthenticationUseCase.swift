@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol AuthenticationUseCase {
+    func authenticate(withCode code: String, deviceID: String, codeVerifier: String) -> AnyPublisher<AuthenticationResponse, Error>
     func saveAccessToken(_ token: String)
-    func getAccessToken() -> String?
 }
 
 final class AuthenticationUseCaseImpl: AuthenticationUseCase {
@@ -21,13 +21,13 @@ final class AuthenticationUseCaseImpl: AuthenticationUseCase {
         self.repository = repository
     }
     
-    public func saveAccessToken(_ token: String) {
-        repository.saveAccessToken(token)
+    public func authenticate(withCode code: String, deviceID: String, codeVerifier: String) -> AnyPublisher<AuthenticationResponse, Error> {
+        return repository.exchangeCodeForToken(code, deviceID: deviceID, codeVerifier: codeVerifier)
     }
     
     
-    public func getAccessToken() -> String? {
-        return repository.getAccessToken()
+    public func saveAccessToken(_ token: String) {
+        repository.saveAccessToken(token)
     }
     
 }

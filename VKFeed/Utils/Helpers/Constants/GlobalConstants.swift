@@ -26,6 +26,11 @@ struct GlobalConstants {
     }
     
     
+    struct Height {
+        static let buttonHeight: CGFloat = 48
+    }
+    
+    
     struct CornerRadius {
         static let small: CGFloat = 10
         static let medium: CGFloat = 15
