@@ -14,13 +14,24 @@ struct API {
         let host: String
         let path: String
         let method: HTTPMethod
-        let parameters: [String: String]?
+        var parameters: [String: String]? = nil
+        var headers: [HeaderField: String]? = nil
+        var body: Data? = nil
     }
-    
     
     enum HTTPMethod: String {
         case GET = "GET"
         case POST = "POST"
+    }
+    
+    enum HeaderField: String {
+        case contentType = "Content-Type"
+        case authorization = "Authorization"
+    }
+    
+    struct HeaderValue {
+        static let applicationJSON = "application/json"
+        static let bearerToken = "Bearer"
     }
     
 }
@@ -33,54 +44,93 @@ extension API.Request {
         urlComponents.host = host
         urlComponents.path = path
         
-        if let parameters {
-            urlComponents.queryItems = toQueryItems(parameters)
-        }
+        if let parameters { urlComponents.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) } }
         
         guard let url = urlComponents.url else { return nil }
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        request.setValue(API.HeaderValue.applicationJSON, forHTTPHeaderField: API.HeaderField.contentType.rawValue)
+        
+        if let headers {
+            for (field, value) in headers {
+                request.setValue(value, forHTTPHeaderField: field.rawValue)
+            }
+        }
+        
+        if let body { request.httpBody = body }
         
         return request
     }
     
     
-    private func toQueryItems(_ parameters: [String: String]) -> [URLQueryItem] {
-        let queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-        return queryItems
+    static func createBody(key: String, value: Any?) -> Data? {
+        let jsonBody = [key: value]
+        let data = try? JSONSerialization.data(withJSONObject: jsonBody, options: [])
+        
+        return data
     }
     
 }
 
 
-struct VKAuthAPI {
+struct VKIDAPI {
     static let scheme = "https"
-    static let host = "oauth.vk.com"
+    static let host = "id.vk.com"
     
-    enum Paths: String {
-        case authorize = "/authorize"
-        case redirect = "/blank.html"
+    enum Paths {
+        case authorize(codeChallenge: String? = nil)
+        case oauth2Auth(deviceID: String? = nil, codeVerifier: String? = nil)
+        
+        var rawValue: String {
+            switch self {
+            case .authorize:
+                return "/authorize"
+            case .oauth2Auth:
+                return "/oauth2/auth"
+            }
+        }
+    }
+    
+    struct Headers {
+        static let contentTypeJSON = [API.HeaderField.contentType: API.HeaderValue.applicationJSON]
     }
 }
 
-extension VKAuthAPI.Paths {
+extension VKIDAPI.Paths {
     
-    public func parameters() -> [String: String]? {
+    public func parameters() -> [String: String] {
         switch self {
-        case .authorize:
-            let params = [
+        case .authorize(let codeChallenge):
+            var params = [
+                "state": "abracadabra",
+                "response_type": "code",
+                
+                "code_challenge_method": "s256",
                 "client_id": VKConfig.clientID,
-                "redirect_uri": "https://oauth.vk.com/blank.html",
-                "display": "mobile",
-                "scope": "wall,friends,offline",
-                "response_type": "token"
+                "redirect_uri": VKConfig.redirectURI,
+                "prompt": "login",
+                "scope": "offline%wall%friends"
             ]
+            
+            if let codeChallenge { params["code_challenge"] = codeChallenge }
             
             return params
             
-        case .redirect:
-            return nil
+        case .oauth2Auth(let deviceID, let codeVerifier):
+            var params = [
+                "state": "abracadabracodeexchange",
+                "grant_type": "authorization_code",
+                "redirect_uri": VKConfig.redirectURI,
+                "client_id": VKConfig.clientID
+            ]
+            
+            if let deviceID, let codeVerifier {
+                params["device_id"] = deviceID
+                params["code_verifier"] = codeVerifier
+            }
+            
+            return params
         }
     }
     
@@ -102,39 +152,22 @@ struct VKAPI {
 extension VKAPI.Paths {
     
     public func parameters(withAccessToken accessToken: String) -> [String: String] {
+        var params: [String: String] = [
+            "access_token": accessToken,
+            "v": "5.131"
+        ]
+        
         switch self {
         case .usersGet:
-            let params = [
-                "access_token": accessToken,
-                "v": "5.131"
-            ]
-            
             return params
             
         case .newsFeedGet:
-            let params = [
-                "access_token": accessToken,
-                "filters": "post",
-                "count": "50",
-                "v": "5.131"
-            ]
+            params["filters"] = "post"
+            params["count"] = "50"
             
             return params
             
-        case .likesAdd:
-            let params = [
-                "access_token": accessToken,
-                "v": "5.131"
-            ]
-            
-            return params
-            
-        case .likesDelete:
-            let params = [
-                "access_token": accessToken,
-                "v": "5.131"
-            ]
-            
+        case .likesAdd, .likesDelete:
             return params
         }
     }

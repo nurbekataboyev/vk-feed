@@ -19,8 +19,9 @@ final class LoginRouterImpl: LoginRouter {
     
     static func configure() -> UIViewController {
         let keychainService = KeychainService()
+        let apiService = APIService()
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
-        let authRepository = AuthenticationRepositoryImpl(storage: accessTokenStorage)
+        let authRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
         let authUseCase = AuthenticationUseCaseImpl(repository: authRepository)
         let router = LoginRouterImpl()
         let viewModel = LoginViewModelImpl(authenticationUseCase: authUseCase, router: router)
