@@ -23,11 +23,11 @@ final class NewsFeedRouterImpl: NewsFeedRouter {
         let keychainService = KeychainService()
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         let newsFeedRepository = NewsFeedRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
-        let fetchNewsFeedUseCase = FetchNewsFeedUseCaseImpl(repository: newsFeedRepository)
+        let newsFeedUseCase = NewsFeedUseCaseImpl(newsFeedRepository: newsFeedRepository)
         let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
         let logoutUseCase = LogoutUseCaseImpl(authenticationRepository: authenticationRepository)
         let router = NewsFeedRouterImpl()
-        let viewModel = NewsFeedViewModelImpl(fetchNewsFeedUseCase: fetchNewsFeedUseCase, logoutUseCase: logoutUseCase, router: router)
+        let viewModel = NewsFeedViewModelImpl(newsFeedUseCase: newsFeedUseCase, logoutUseCase: logoutUseCase, router: router)
         let newsFeed = NewsFeedViewController(viewModel: viewModel)
         
         router.viewController = newsFeed
@@ -44,6 +44,11 @@ final class NewsFeedRouterImpl: NewsFeedRouter {
     
     public func presentPostDetails(_ post: Post) {
         let postDetails = PostDetailsRouterImpl.configure(with: post)
+        
+        if let postDetails = postDetails as? PostDetailsViewController {
+            postDetails.delegate = viewController as? NewsFeedViewController
+        }
+        
         viewController?.present(UINavigationController(rootViewController: postDetails), animated: true)
     }
     

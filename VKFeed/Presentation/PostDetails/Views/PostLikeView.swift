@@ -8,14 +8,19 @@
 import UIKit
 import SnapKit
 
+protocol PostLikeDelegate: AnyObject {
+    func didToggleLike()
+}
+
 final class PostLikeView: UIView {
     
     private struct Constans {
         static let height: CGFloat = 48
-        static let likeImageHeight: CGFloat = 25
+        static let likeImageSize: CGFloat = 25
     }
     
-    private var postLikes: PostLikes
+    public weak var delegate: PostLikeDelegate?
+    public var postLikes: PostLikes { didSet { updateLikeView() } }
     
     private var likeImageView = VKImageView(contentMode: .scaleAspectFill)
     private var likeCountLabel = VKLabel(style: .headline, weight: .medium)
@@ -25,7 +30,6 @@ final class PostLikeView: UIView {
         super.init(frame: .zero)
         
         setupViews()
-        updateLikeView()
         layout()
     }
     
@@ -61,7 +65,7 @@ final class PostLikeView: UIView {
         likeImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(GlobalConstants.Padding.medium)
-            $0.size.equalTo(Constans.likeImageHeight)
+            $0.size.equalTo(Constans.likeImageSize)
         }
         
         likeCountLabel.snp.makeConstraints {
@@ -83,15 +87,19 @@ extension PostLikeView {
     
     @objc func toggleLikeHandler() {
         updatePostLikes()
-        updateLikeView()
+        delegate?.didToggleLike()
         
         makeVibration(.medium)
     }
     
     
     private func updatePostLikes() {
-        postLikes.userLikes.toggle()
-        postLikes.count += postLikes.userLikes ? 1 : -1
+        var updatedPostLikes = postLikes
+        
+        updatedPostLikes.userLikes.toggle()
+        updatedPostLikes.count += postLikes.userLikes ? -1 : 1
+        
+        postLikes = updatedPostLikes
     }
     
 }

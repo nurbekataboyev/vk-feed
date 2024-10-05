@@ -15,6 +15,7 @@ protocol NewsFeedViewModel {
     
     func viewDidLoad()
     func fetchNewsFeed(shouldRefresh: Bool)
+    func updateNewsFeed(with post: Post)
     
     func logout()
     
@@ -24,7 +25,7 @@ protocol NewsFeedViewModel {
 final class NewsFeedViewModelImpl: NewsFeedViewModel {
     
     // internal
-    private let fetchNewsFeedUseCase: FetchNewsFeedUseCase
+    private let newsFeedUseCase: NewsFeedUseCase
     private let logoutUseCase: LogoutUseCase
     private let router: NewsFeedRouter
     
@@ -47,10 +48,10 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
         return $errorMessage.eraseToAnyPublisher()
     }
     
-    init(fetchNewsFeedUseCase: FetchNewsFeedUseCase,
+    init(newsFeedUseCase: NewsFeedUseCase,
          logoutUseCase: LogoutUseCase,
          router: NewsFeedRouter) {
-        self.fetchNewsFeedUseCase = fetchNewsFeedUseCase
+        self.newsFeedUseCase = newsFeedUseCase
         self.logoutUseCase = logoutUseCase
         self.router = router
     }
@@ -65,7 +66,7 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
         
         if shouldRefresh { newsFeed.response?.nextFrom = nil }
         
-        fetchNewsFeedUseCase.fetchNewsFeed(startFrom: newsFeed.response?.nextFrom)
+        newsFeedUseCase.fetchNewsFeed(startFrom: newsFeed.response?.nextFrom)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -81,6 +82,15 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
                 updateNewsFeed(newsFeed, shouldRefresh: shouldRefresh)
             }
             .store(in: &cancellables)
+    }
+    
+    
+    public func updateNewsFeed(with post: Post) {
+        guard let newsFeedItem = post.toNewsFeedItem(groups: newsFeed.response?.groups) else { return }
+        
+        if let index = newsFeed.response?.items.firstIndex(where: { $0.postID == newsFeedItem.postID }) {
+            newsFeed.response?.items[index] = newsFeedItem
+        }
     }
     
     

@@ -6,7 +6,12 @@
 //
 
 import UIKit
+import Combine
 import SnapKit
+
+protocol PostDetailsDelegate: AnyObject {
+    func didUpdatePost(_ post: Post)
+}
 
 final class PostDetailsViewController: UIViewController {
     
@@ -17,6 +22,10 @@ final class PostDetailsViewController: UIViewController {
     
     private var post: Post
     private let viewModel: PostDetailsViewModel
+    
+    public weak var delegate: PostDetailsDelegate?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private var scrollView = UIScrollView()
     private var containerView = UIView()
@@ -37,9 +46,38 @@ final class PostDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewModel()
         setupViews()
         setupPost()
         layout()
+    }
+    
+    
+    private func bindViewModel() {
+        viewModel.postPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] post in
+                guard let self else { return }
+                updatePost(post)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.errorMessagePublisher
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { [weak self] errorMessage in
+                guard let self else { return }
+                if let errorMessage { presentAlert(message: errorMessage) }
+            }
+            .store(in: &cancellables)
+    }
+    
+    
+    private func updatePost(_ post: Post) {
+        self.post = post
+        postLikeView.postLikes = post.likes
+        
+        delegate?.didUpdatePost(post)
     }
     
     
@@ -68,6 +106,8 @@ final class PostDetailsViewController: UIViewController {
         
         postImageView.layer.cornerRadius = GlobalConstants.CornerRadius.small
         postImageView.clipsToBounds = true
+        
+        postLikeView.delegate = self
     }
     
     
@@ -144,6 +184,15 @@ extension PostDetailsViewController {
     
     @objc func closeButtonHandler() {
         viewModel.close()
+    }
+    
+}
+
+
+extension PostDetailsViewController: PostLikeDelegate {
+    
+    func didToggleLike() {
+        viewModel.toggleLike(for: post)
     }
     
 }

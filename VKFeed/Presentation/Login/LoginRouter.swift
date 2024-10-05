@@ -21,10 +21,10 @@ final class LoginRouterImpl: LoginRouter {
         let keychainService = KeychainService()
         let apiService = APIService()
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
-        let authRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
-        let authUseCase = AuthenticationUseCaseImpl(repository: authRepository)
+        let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
+        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository)
         let router = LoginRouterImpl()
-        let viewModel = LoginViewModelImpl(authenticationUseCase: authUseCase, router: router)
+        let viewModel = LoginViewModelImpl(authenticationUseCase: authenticationUseCase, router: router)
         let login = LoginViewController(viewModel: viewModel)
         
         router.viewController = login
