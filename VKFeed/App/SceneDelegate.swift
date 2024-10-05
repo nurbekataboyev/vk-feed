@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     
     private func setupWindowScene(_ windowScene: UIWindowScene) {
-        let rootViewController = isAccessTokenValid ? NewsFeedRouterImpl.configure() : LoginRouterImpl.configure()
+        let rootViewController = isLoggedIn ? NewsFeedRouterImpl.configure() : LoginRouterImpl.configure()
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
@@ -63,13 +63,13 @@ extension SceneDelegate {
     }
     
     
-    private var isAccessTokenValid: Bool {
-        let keychainService = KeychainService()
-        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
+    private var isLoggedIn: Bool {
+        let userDefaultsService = UserDefaultsService()
+        let userStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
         
-        let isAccessTokenValid = accessTokenStorage.getAccessToken() != nil
+        let isLoggedIn = userStorage.getUser() != nil
         
-        return isAccessTokenValid
+        return isLoggedIn
     }
     
 }

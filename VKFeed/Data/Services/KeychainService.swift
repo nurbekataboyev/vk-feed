@@ -15,7 +15,6 @@ final class KeychainService {
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue,
             kSecValueData as String: data
         ]
@@ -28,7 +27,6 @@ final class KeychainService {
     public func get<Value: Decodable>(forKey key: KeychainKeys.Key) -> Value? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
@@ -50,7 +48,6 @@ final class KeychainService {
     public func delete(forKey key: KeychainKeys.Key) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrAccessGroup as String: KeychainKeys.accessGroup,
             kSecAttrAccount as String: key.rawValue
         ]
         

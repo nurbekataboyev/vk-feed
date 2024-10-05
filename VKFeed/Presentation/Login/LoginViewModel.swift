@@ -20,6 +20,7 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
     
     // internal
     private let authenticationUseCase: AuthenticationUseCase
+    private let userUseCase: UserUseCase
     private let router: LoginRouter
     
     private var cancellables = Set<AnyCancellable>()
@@ -37,8 +38,10 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
     }
     
     init(authenticationUseCase: AuthenticationUseCase,
+         userUseCase: UserUseCase,
          router: LoginRouter) {
         self.authenticationUseCase = authenticationUseCase
+        self.userUseCase = userUseCase
         self.router = router
     }
     
@@ -87,6 +90,14 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
         
         authenticationUseCase.authenticate(withCode: code, deviceID: deviceID, codeVerifier: codeVerifier)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
+            .flatMap { [weak self] authResponse -> AnyPublisher<User, Error> in
+                guard let self else { return Fail(error: VKError.General.unknownError).eraseToAnyPublisher() }
+                
+                authenticationUseCase.saveAccessToken(authResponse.accessToken, expiresIn: authResponse.expiresIn)
+                
+                return userUseCase.fetchUser()
+            }
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
                 guard let self else { return }
                 
@@ -96,10 +107,10 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
                     errorMessage = error.localizedDescription
                 }
                 
-            } receiveValue: { [weak self] authResponse in
+            } receiveValue: { [weak self] user in
                 guard let self else { return }
                 
-                authenticationUseCase.saveAccessToken(authResponse.accessToken, expiresIn: authResponse.expiresIn)
+                userUseCase.saveUser(user)
                 
                 DispatchQueue.main.async {
                     self.router.setNewsFeed()
