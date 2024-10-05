@@ -74,7 +74,7 @@ struct VKIDAPI {
         case oauth2Auth(code: String? = nil, deviceID: String? = nil, codeVerifier: String? = nil)
         case oauth2Logout(accessToken: String? = nil)
         
-        var rawValue: String {
+        var path: String {
             switch self {
             case .authorize:
                 return "/authorize"
@@ -143,7 +143,7 @@ extension VKIDAPI.Paths {
             params["code_challenge_method"] = "s256"
             params["redirect_uri"] = VKConfig.redirectURI
             params["prompt"] = "login"
-            params["scope"] = "offline%wall%friends"
+            params["scope"] = "wall,friends"
             
             if let codeChallenge { params["code_challenge"] = codeChallenge }
             
@@ -176,10 +176,10 @@ struct VKAPI {
     enum Paths {
         case usersGet
         case newsFeedGet(startFrom: String? = nil)
-        case likesAdd
-        case likesDelete
+        case likesAdd(ownerID: Int? = nil, itemID: Int? = nil)
+        case likesDelete(ownerID: Int? = nil, itemID: Int? = nil)
         
-        var rawValue: String {
+        var path: String {
             switch self {
             case .usersGet:
                 return "/method/users.get"
@@ -214,7 +214,14 @@ extension VKAPI.Paths {
             
             return params
             
-        case .likesAdd, .likesDelete:
+        case .likesAdd(let ownerID, let itemID), .likesDelete(let ownerID, let itemID):
+            params["type"] = "post"
+            
+            if let ownerID, let itemID {
+                params["owner_id"] = String(-ownerID)
+                params["item_id"] = String(itemID)
+            }
+            
             return params
         }
     }

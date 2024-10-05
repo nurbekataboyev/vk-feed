@@ -7,6 +7,7 @@
 
 import Foundation
 
+// ----- Authentication -----
 struct AuthenticationResponse: Decodable {
     let accessToken: String
     let expiresIn: Int
@@ -29,6 +30,8 @@ struct AuthenticationResponse: Decodable {
     }
 }
 
+
+// ----- Token Invalidation -----
 struct TokenInvalidationResponse: Decodable {
     let response: Int
     

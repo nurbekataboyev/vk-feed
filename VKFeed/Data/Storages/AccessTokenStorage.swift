@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AccessTokenStorage {
-    func saveAccessToken(_ token: String)
+    func saveAccessToken(_ token: String, expiresIn seconds: Int)
     func getAccessToken() -> String?
     func clearAccessToken()
 }
@@ -21,8 +21,9 @@ final class AccessTokenStorageImpl: AccessTokenStorage {
         self.keychainService = keychainService
     }
     
-    public func saveAccessToken(_ token: String) {
-        let expirationDate = Date().addingTimeInterval(86000)
+    public func saveAccessToken(_ token: String, expiresIn seconds: Int) {
+        let expirationDateInterval = Double(seconds - 100) // extra 100 for safety
+        let expirationDate = Date().addingTimeInterval(expirationDateInterval)
         
         keychainService.save(value: token, forKey: .accessToken)
         keychainService.save(value: expirationDate.timeIntervalSince1970, forKey: .accessTokenExpiration)

@@ -52,7 +52,7 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
         let request = API.Request(
             scheme: VKIDAPI.scheme,
             host: VKIDAPI.host,
-            path: VKIDAPI.Paths.authorize().rawValue,
+            path: VKIDAPI.Paths.authorize().path,
             method: .POST,
             parameters: VKIDAPI.Paths.authorize(codeChallenge: codeChallenge).parameters())
             .createURLRequest()
@@ -99,7 +99,7 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
             } receiveValue: { [weak self] authResponse in
                 guard let self else { return }
                 
-                authenticationUseCase.saveAccessToken(authResponse.accessToken)
+                authenticationUseCase.saveAccessToken(authResponse.accessToken, expiresIn: authResponse.expiresIn)
                 
                 DispatchQueue.main.async {
                     self.router.setNewsFeed()

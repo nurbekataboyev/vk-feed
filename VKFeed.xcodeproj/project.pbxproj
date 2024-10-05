@@ -31,8 +31,8 @@
 		1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965AD2CA41C48004D752E /* LoginRouter.swift */; };
 		1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B12CA42242004D752E /* NewsFeed.swift */; };
 		1FF965B42CA42247004D752E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B32CA42247004D752E /* User.swift */; };
-		1FF965B62CA42291004D752E /* FetchNewsFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */; };
-		1FF965B82CA4229D004D752E /* TogglePostLikeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B72CA4229D004D752E /* TogglePostLikeUseCase.swift */; };
+		1FF965B62CA42291004D752E /* NewsFeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B52CA42291004D752E /* NewsFeedUseCase.swift */; };
+		1FF965B82CA4229D004D752E /* PostLikeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B72CA4229D004D752E /* PostLikeUseCase.swift */; };
 		1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965B92CA422AB004D752E /* NewsFeedRepository.swift */; };
 		1FF965BC2CA422C4004D752E /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965BB2CA422C4004D752E /* PostRepository.swift */; };
 		1FF965BF2CA422E1004D752E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965BE2CA422E1004D752E /* API.swift */; };
@@ -89,8 +89,8 @@
 		1FF965AD2CA41C48004D752E /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		1FF965B12CA42242004D752E /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		1FF965B32CA42247004D752E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchNewsFeedUseCase.swift; sourceTree = "<group>"; };
-		1FF965B72CA4229D004D752E /* TogglePostLikeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglePostLikeUseCase.swift; sourceTree = "<group>"; };
+		1FF965B52CA42291004D752E /* NewsFeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedUseCase.swift; sourceTree = "<group>"; };
+		1FF965B72CA4229D004D752E /* PostLikeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeUseCase.swift; sourceTree = "<group>"; };
 		1FF965B92CA422AB004D752E /* NewsFeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedRepository.swift; sourceTree = "<group>"; };
 		1FF965BB2CA422C4004D752E /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		1FF965BE2CA422E1004D752E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 			children = (
 				1FF965A72CA3FD81004D752E /* AuthenticationUseCase.swift */,
 				1F9DDB602CAED416001BB6BF /* LogoutUseCase.swift */,
-				1FF965B52CA42291004D752E /* FetchNewsFeedUseCase.swift */,
-				1FF965B72CA4229D004D752E /* TogglePostLikeUseCase.swift */,
+				1FF965B52CA42291004D752E /* NewsFeedUseCase.swift */,
+				1FF965B72CA4229D004D752E /* PostLikeUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -503,7 +503,7 @@
 				1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */,
 				1FF965A62CA3FD6E004D752E /* LoginViewController.swift in Sources */,
 				1FF965ED2CA561AA004D752E /* PostCell.swift in Sources */,
-				1FF965B62CA42291004D752E /* FetchNewsFeedUseCase.swift in Sources */,
+				1FF965B62CA42291004D752E /* NewsFeedUseCase.swift in Sources */,
 				1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */,
 				1FF965D22CA425C7004D752E /* PostDetailsViewModel.swift in Sources */,
 				1F9DDB572CABC8F0001BB6BF /* VKButton.swift in Sources */,
@@ -516,7 +516,7 @@
 				1F9DDB2D2CA7DD9F001BB6BF /* UIImageView+Ext.swift in Sources */,
 				1FF965C72CA4234B004D752E /* VKError.swift in Sources */,
 				1F9DDB312CA7E580001BB6BF /* VKEmptyStateView.swift in Sources */,
-				1FF965B82CA4229D004D752E /* TogglePostLikeUseCase.swift in Sources */,
+				1FF965B82CA4229D004D752E /* PostLikeUseCase.swift in Sources */,
 				1FF965BC2CA422C4004D752E /* PostRepository.swift in Sources */,
 				1FF965BA2CA422AB004D752E /* NewsFeedRepository.swift in Sources */,
 				1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */,

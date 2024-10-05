@@ -27,7 +27,7 @@ final class NewsFeedRepositoryImpl: NewsFeedRepository {
         let request = API.Request(
             scheme: VKAPI.scheme,
             host: VKAPI.host,
-            path: VKAPI.Paths.newsFeedGet().rawValue,
+            path: VKAPI.Paths.newsFeedGet().path,
             method: .POST,
             parameters: VKAPI.Paths.newsFeedGet(startFrom: startFrom).parameters(withAccessToken: accessToken))
         

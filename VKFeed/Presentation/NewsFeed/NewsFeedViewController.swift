@@ -59,10 +59,7 @@ final class NewsFeedViewController: UIViewController {
             .dropFirst()
             .sink { [weak self] errorMessage in
                 guard let self else { return }
-                
-                if let errorMessage {
-                    presentAlert(message: errorMessage)
-                }
+                if let errorMessage { presentAlert(message: errorMessage) }
             }
             .store(in: &cancellables)
     }
@@ -173,6 +170,15 @@ extension NewsFeedViewController: NewsFeedCollectionDelegate {
     
     func didTapPost(_ post: Post) {
         viewModel.presentPostDetails(post)
+    }
+    
+}
+
+
+extension NewsFeedViewController: PostDetailsDelegate {
+    
+    func didUpdatePost(_ post: Post) {
+        viewModel.updateNewsFeed(with: post)
     }
     
 }

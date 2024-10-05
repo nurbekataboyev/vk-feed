@@ -48,7 +48,7 @@ extension NewsFeedItem {
         }
         
         let post = Post(
-            postID: postID,
+            id: postID,
             text: text,
             photoURL: attachments.first?.photo?.photo.url,
             likes: likes,

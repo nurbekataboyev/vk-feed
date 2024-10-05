@@ -47,10 +47,7 @@ final class LoginViewController: UIViewController {
             .dropFirst()
             .sink { [weak self] errorMessage in
                 guard let self else { return }
-                
-                if let errorMessage {
-                    presentAlert(message: errorMessage)
-                }
+                if let errorMessage { presentAlert(message: errorMessage) }
             }
             .store(in: &cancellables)
     }

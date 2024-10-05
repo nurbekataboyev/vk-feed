@@ -80,7 +80,6 @@ final class PostCell: UICollectionViewCell {
         postTextLabel.snp.makeConstraints {
             $0.top.equalTo(authorAvatarImageView.snp.bottom).offset(GlobalConstants.Padding.small)
             $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
-            
         }
         
         postImageView.snp.makeConstraints {

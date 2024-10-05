@@ -10,24 +10,24 @@ import Combine
 
 protocol AuthenticationUseCase {
     func authenticate(withCode code: String, deviceID: String, codeVerifier: String) -> AnyPublisher<AuthenticationResponse, Error>
-    func saveAccessToken(_ token: String)
+    func saveAccessToken(_ token: String, expiresIn: Int)
 }
 
 final class AuthenticationUseCaseImpl: AuthenticationUseCase {
     
-    private let repository: AuthenticationRepository
+    private let authenticationRepository: AuthenticationRepository
     
-    init(repository: AuthenticationRepository) {
-        self.repository = repository
+    init(authenticationRepository: AuthenticationRepository) {
+        self.authenticationRepository = authenticationRepository
     }
     
     public func authenticate(withCode code: String, deviceID: String, codeVerifier: String) -> AnyPublisher<AuthenticationResponse, Error> {
-        return repository.exchangeCodeForToken(code, deviceID: deviceID, codeVerifier: codeVerifier)
+        return authenticationRepository.exchangeCodeForToken(code, deviceID: deviceID, codeVerifier: codeVerifier)
     }
     
     
-    public func saveAccessToken(_ token: String) {
-        repository.saveAccessToken(token)
+    public func saveAccessToken(_ token: String, expiresIn: Int) {
+        authenticationRepository.saveAccessToken(token, expiresIn: expiresIn)
     }
     
 }

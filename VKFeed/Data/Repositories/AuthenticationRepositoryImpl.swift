@@ -23,7 +23,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         let request = API.Request(
             scheme: VKIDAPI.scheme,
             host: VKIDAPI.host,
-            path: VKIDAPI.Paths.oauth2Auth().rawValue,
+            path: VKIDAPI.Paths.oauth2Auth().path,
             method: .POST,
             parameters: VKIDAPI.Paths.oauth2Auth(deviceID: deviceID, codeVerifier: codeVerifier).parameters(),
             headers: VKIDAPI.Paths.oauth2Auth().headers(),
@@ -39,7 +39,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         let request = API.Request(
             scheme: VKIDAPI.scheme,
             host: VKIDAPI.host,
-            path: VKIDAPI.Paths.oauth2Logout().rawValue,
+            path: VKIDAPI.Paths.oauth2Logout().path,
             method: .POST,
             parameters: VKIDAPI.Paths.oauth2Logout().parameters(),
             headers: VKIDAPI.Paths.oauth2Logout(accessToken: accessToken).headers())
@@ -48,8 +48,8 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     }
     
     
-    public func saveAccessToken(_ token: String) {
-        accessTokenStorage.saveAccessToken(token)
+    public func saveAccessToken(_ token: String, expiresIn: Int) {
+        accessTokenStorage.saveAccessToken(token, expiresIn: expiresIn)
     }
     
     
