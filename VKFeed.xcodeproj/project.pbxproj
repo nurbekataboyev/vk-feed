@@ -18,7 +18,12 @@
 		1F9DDB592CAE734A001BB6BF /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB582CAE734A001BB6BF /* AuthenticationHelper.swift */; };
 		1F9DDB5C2CAE8A77001BB6BF /* URL+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB5B2CAE8A77001BB6BF /* URL+ext.swift */; };
 		1F9DDB5F2CAEC41D001BB6BF /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB5E2CAEC41D001BB6BF /* Authentication.swift */; };
-		1F9DDB612CAED416001BB6BF /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB602CAED416001BB6BF /* LogoutUseCase.swift */; };
+		1F9DDB632CB15490001BB6BF /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB622CB15490001BB6BF /* UserRepository.swift */; };
+		1F9DDB652CB154D6001BB6BF /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB642CB154D6001BB6BF /* UserRepositoryImpl.swift */; };
+		1F9DDB672CB15685001BB6BF /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB662CB15685001BB6BF /* UserDefaultsService.swift */; };
+		1F9DDB692CB156B2001BB6BF /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB682CB156B2001BB6BF /* UserDefaultsKeys.swift */; };
+		1F9DDB6B2CB157BF001BB6BF /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */; };
+		1F9DDB6D2CB158F5001BB6BF /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB6C2CB158F5001BB6BF /* UserUseCase.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -74,7 +79,12 @@
 		1F9DDB582CAE734A001BB6BF /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
 		1F9DDB5B2CAE8A77001BB6BF /* URL+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ext.swift"; sourceTree = "<group>"; };
 		1F9DDB5E2CAEC41D001BB6BF /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
-		1F9DDB602CAED416001BB6BF /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		1F9DDB622CB15490001BB6BF /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		1F9DDB642CB154D6001BB6BF /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
+		1F9DDB662CB15685001BB6BF /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		1F9DDB682CB156B2001BB6BF /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		1F9DDB6C2CB158F5001BB6BF /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965EE2CA562D9004D752E /* GlobalConstants.swift */,
+				1F9DDB682CB156B2001BB6BF /* UserDefaultsKeys.swift */,
 				1FF966012CA5C766004D752E /* KeychainKeys.swift */,
 			);
 			path = Constants;
@@ -284,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965AB2CA3FDC6004D752E /* AuthenticationRepository.swift */,
+				1F9DDB622CB15490001BB6BF /* UserRepository.swift */,
 				1FF965B92CA422AB004D752E /* NewsFeedRepository.swift */,
 				1FF965BB2CA422C4004D752E /* PostRepository.swift */,
 			);
@@ -294,7 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965A72CA3FD81004D752E /* AuthenticationUseCase.swift */,
-				1F9DDB602CAED416001BB6BF /* LogoutUseCase.swift */,
+				1F9DDB6C2CB158F5001BB6BF /* UserUseCase.swift */,
 				1FF965B52CA42291004D752E /* NewsFeedUseCase.swift */,
 				1FF965B72CA4229D004D752E /* PostLikeUseCase.swift */,
 			);
@@ -348,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965A92CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift */,
+				1F9DDB642CB154D6001BB6BF /* UserRepositoryImpl.swift */,
 				1FF965C22CA4231D004D752E /* NewsFeedRepositoryImpl.swift */,
 				1FF965C42CA42327004D752E /* PostRepositoryImpl.swift */,
 			);
@@ -357,6 +370,7 @@
 		1FF965A12CA3F990004D752E /* Storages */ = {
 			isa = PBXGroup;
 			children = (
+				1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */,
 				1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */,
 			);
 			path = Storages;
@@ -411,6 +425,7 @@
 		1FF966032CA5CD86004D752E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1F9DDB662CB15685001BB6BF /* UserDefaultsService.swift */,
 				1FF966042CA5CD94004D752E /* KeychainService.swift */,
 			);
 			path = Services;
@@ -509,6 +524,7 @@
 				1F9DDB572CABC8F0001BB6BF /* VKButton.swift in Sources */,
 				1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */,
 				1FF9658E2CA3F7B6004D752E /* SceneDelegate.swift in Sources */,
+				1F9DDB672CB15685001BB6BF /* UserDefaultsService.swift in Sources */,
 				1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */,
 				1FF965A42CA3FD62004D752E /* LoginViewModel.swift in Sources */,
 				1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */,
@@ -525,13 +541,17 @@
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
 				1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */,
 				1FF965EA2CA560F8004D752E /* NewsFeedCollectionViewController.swift in Sources */,
+				1F9DDB632CB15490001BB6BF /* UserRepository.swift in Sources */,
 				1FF965CC2CA425AF004D752E /* NewsFeedViewModel.swift in Sources */,
 				1FF965D42CA425CE004D752E /* PostDetailsRouter.swift in Sources */,
+				1F9DDB6B2CB157BF001BB6BF /* UserStorage.swift in Sources */,
 				1FF965C32CA4231D004D752E /* NewsFeedRepositoryImpl.swift in Sources */,
 				1FF965F12CA56449004D752E /* UICollectionView+Ext.swift in Sources */,
+				1F9DDB692CB156B2001BB6BF /* UserDefaultsKeys.swift in Sources */,
 				1F9DDB552CA9922C001BB6BF /* PostLikeView.swift in Sources */,
 				1FF965F52CA57C80004D752E /* UIFont+Ext.swift in Sources */,
 				1FF965EF2CA562D9004D752E /* GlobalConstants.swift in Sources */,
+				1F9DDB652CB154D6001BB6BF /* UserRepositoryImpl.swift in Sources */,
 				1F9DDB262CA6E06E001BB6BF /* Post.swift in Sources */,
 				1F9DDB2F2CA7E1C7001BB6BF /* Date+Ext.swift in Sources */,
 				1FF965B22CA42242004D752E /* NewsFeed.swift in Sources */,
@@ -539,10 +559,10 @@
 				1FF965C52CA42327004D752E /* PostRepositoryImpl.swift in Sources */,
 				1F9DDB5C2CAE8A77001BB6BF /* URL+ext.swift in Sources */,
 				1FF965CE2CA425B6004D752E /* NewsFeedRouter.swift in Sources */,
-				1F9DDB612CAED416001BB6BF /* LogoutUseCase.swift in Sources */,
 				1F9DDB592CAE734A001BB6BF /* AuthenticationHelper.swift in Sources */,
 				1FF965D02CA425BE004D752E /* PostDetailsViewController.swift in Sources */,
 				1FF965B42CA42247004D752E /* User.swift in Sources */,
+				1F9DDB6D2CB158F5001BB6BF /* UserUseCase.swift in Sources */,
 				1FF965F92CA57CFB004D752E /* VKImageView.swift in Sources */,
 				1FF965CA2CA425A8004D752E /* NewsFeedViewController.swift in Sources */,
 				1F9DDB5F2CAEC41D001BB6BF /* Authentication.swift in Sources */,

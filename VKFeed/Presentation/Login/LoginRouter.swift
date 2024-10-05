@@ -22,9 +22,13 @@ final class LoginRouterImpl: LoginRouter {
         let apiService = APIService()
         let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
         let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
-        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository)
+        let userDefaultsService = UserDefaultsService()
+        let userStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
+        let userRepository = UserRepositoryImpl(apiService: apiService, userStorage: userStorage, accessTokenStorage: accessTokenStorage)
+        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository, userRepository: userRepository)
+        let userUseCase = UserUseCaseImpl(userRepository: userRepository)
         let router = LoginRouterImpl()
-        let viewModel = LoginViewModelImpl(authenticationUseCase: authenticationUseCase, router: router)
+        let viewModel = LoginViewModelImpl(authenticationUseCase: authenticationUseCase, userUseCase: userUseCase, router: router)
         let login = LoginViewController(viewModel: viewModel)
         
         router.viewController = login

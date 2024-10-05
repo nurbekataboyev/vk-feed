@@ -9,6 +9,18 @@ import Foundation
 
 struct VKError {
     
+    enum General: LocalizedError {
+        case unknownError
+        
+        var errorDescription: String? {
+            switch self {
+            case .unknownError:
+                return "An unknown error occurred. Please try again"
+            }
+        }
+    }
+    
+    
     enum Login: LocalizedError {
         case loginFailed
         

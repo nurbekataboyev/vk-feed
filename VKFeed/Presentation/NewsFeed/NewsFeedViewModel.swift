@@ -26,7 +26,7 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     
     // internal
     private let newsFeedUseCase: NewsFeedUseCase
-    private let logoutUseCase: LogoutUseCase
+    private let authenticationUseCase: AuthenticationUseCase
     private let router: NewsFeedRouter
     
     private var cancellables = Set<AnyCancellable>()
@@ -49,10 +49,10 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     }
     
     init(newsFeedUseCase: NewsFeedUseCase,
-         logoutUseCase: LogoutUseCase,
+         authenticationUseCase: AuthenticationUseCase,
          router: NewsFeedRouter) {
         self.newsFeedUseCase = newsFeedUseCase
-        self.logoutUseCase = logoutUseCase
+        self.authenticationUseCase = authenticationUseCase
         self.router = router
     }
     
@@ -97,7 +97,7 @@ final class NewsFeedViewModelImpl: NewsFeedViewModel {
     public func logout() {
         isLoading = true
         
-        logoutUseCase.logout()
+        authenticationUseCase.logout()
             .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
                 guard let self else { return }
