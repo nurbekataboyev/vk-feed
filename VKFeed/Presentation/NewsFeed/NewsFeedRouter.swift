@@ -28,9 +28,9 @@ final class NewsFeedRouterImpl: NewsFeedRouter {
         let userDefaultsService = UserDefaultsService()
         let userStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
         let userRepository = UserRepositoryImpl(apiService: apiService, userStorage: userStorage, accessTokenStorage: accessTokenStorage)
-        let logoutUseCase = LogoutUseCaseImpl(authenticationRepository: authenticationRepository, userRepository: userRepository)
+        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository, userRepository: userRepository)
         let router = NewsFeedRouterImpl()
-        let viewModel = NewsFeedViewModelImpl(newsFeedUseCase: newsFeedUseCase, logoutUseCase: logoutUseCase, router: router)
+        let viewModel = NewsFeedViewModelImpl(newsFeedUseCase: newsFeedUseCase, authenticationUseCase: authenticationUseCase, router: router)
         let newsFeed = NewsFeedViewController(viewModel: viewModel)
         
         router.viewController = newsFeed
