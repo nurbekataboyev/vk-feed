@@ -19,9 +19,13 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         static let spacing: CGFloat = 12
     }
     
+    private enum Section { case posts }
+    
     public weak var delegate: NewsFeedCollectionDelegate?
-    public var posts: [Post] = [] { didSet { collectionView.reloadData() } }
+    public var posts: [Post] = [] { didSet { updateData() } }
     public var shouldScrollToTop: Bool = false { didSet { scrollToTop() } }
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Post>?
     
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
@@ -31,6 +35,7 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         setupViews()
+        configureDataSource()
     }
     
     
@@ -43,6 +48,49 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         collectionView.register(PostCell.self, forCellWithReuseIdentifier: PostCell.reuseIdentifier)
     }
     
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Post>(collectionView: collectionView, cellProvider: { collectionView, indexPath, post in
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCell.reuseIdentifier, for: indexPath) as? PostCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.setup(with: post)
+            
+            return cell
+        })
+    }
+    
+    
+    private func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Post>()
+        snapshot.appendSections([.posts])
+        snapshot.appendItems(posts)
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+    
+    private func scrollToTop() {
+        if posts.count > 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+
+extension NewsFeedCollectionViewController {
     
     private func setupLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] _, _ in
@@ -73,40 +121,10 @@ final class NewsFeedCollectionViewController: UICollectionViewController {
         return section
     }
     
-    
-    private func scrollToTop() {
-        if posts.count > 0 {
-            let indexPath = IndexPath(row: 0, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        }
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 
 extension NewsFeedCollectionViewController {
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCell.reuseIdentifier, for: indexPath) as? PostCell else {
-            return UICollectionViewCell()
-        }
-        
-        let post = posts[indexPath.row]
-        cell.setup(with: post)
-        
-        return cell
-    }
-    
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastRow = posts.count - 1

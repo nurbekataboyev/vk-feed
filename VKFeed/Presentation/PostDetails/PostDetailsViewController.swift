@@ -34,7 +34,7 @@ final class PostDetailsViewController: UIViewController {
     private var postDateLabel = VKLabel(style: .footnote, color: .secondaryLabel)
     private var postTextLabel = VKLabel(style: .subheadline)
     private var postImageView = VKImageView(contentMode: .scaleAspectFill)
-    private lazy var postLikeView = PostLikeView(post.likes)
+    private lazy var postLikeView = PostLikeView(post)
     
     init(_ post: Post,
          viewModel: PostDetailsViewModel) {
@@ -56,6 +56,7 @@ final class PostDetailsViewController: UIViewController {
     private func bindViewModel() {
         viewModel.postPublisher
             .receive(on: DispatchQueue.main)
+            .dropFirst()
             .sink { [weak self] post in
                 guard let self else { return }
                 updatePost(post)
@@ -74,10 +75,15 @@ final class PostDetailsViewController: UIViewController {
     
     
     private func updatePost(_ post: Post) {
-        self.post = post
-        postLikeView.postLikes = post.likes
+        let isOldPost = self.post == post
         
-        delegate?.didUpdatePost(post)
+        self.post = post
+        
+        if isOldPost {
+            postLikeView.revertLike()
+        } else {
+            delegate?.didUpdatePost(post)
+        }
     }
     
     
@@ -207,7 +213,7 @@ extension PostDetailsViewController {
 
 extension PostDetailsViewController: PostLikeDelegate {
     
-    func didToggleLike() {
+    func didToggleLike(for post: Post) {
         viewModel.toggleLike(for: post)
     }
     

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol PostLikeDelegate: AnyObject {
-    func didToggleLike()
+    func didToggleLike(for post: Post)
 }
 
 final class PostLikeView: UIView {
@@ -19,18 +19,26 @@ final class PostLikeView: UIView {
         static let likeImageSize: CGFloat = 25
     }
     
+    private var post: Post
+    
     public weak var delegate: PostLikeDelegate?
-    public var postLikes: PostLikes { didSet { updateLikeView() } }
     
     private var likeImageView = VKImageView(contentMode: .scaleAspectFill)
     private var likeCountLabel = VKLabel(style: .headline, weight: .medium)
     
-    init(_ postLikes: PostLikes) {
-        self.postLikes = postLikes
+    init(_ post: Post) {
+        self.post = post
         super.init(frame: .zero)
         
         setupViews()
+        updateLikeView()
         layout()
+    }
+    
+    
+    public func revertLike() {
+        updatePostLikes()
+        updateLikeView()
     }
     
     
@@ -47,13 +55,13 @@ final class PostLikeView: UIView {
     
     
     private func updateLikeView() {
-        backgroundColor = postLikes.userLikes ? .vkLikeSecondary : .secondarySystemBackground
+        backgroundColor = post.likes.userLikes ? .vkLikeSecondary : .secondarySystemBackground
         
-        likeImageView.image = UIImage(systemName: postLikes.userLikes ? "heart.fill" : "heart")
-        likeImageView.tintColor = postLikes.userLikes ? .vkLikePrimary : .secondaryLabel
+        likeImageView.image = UIImage(systemName: post.likes.userLikes ? "heart.fill" : "heart")
+        likeImageView.tintColor = post.likes.userLikes ? .vkLikePrimary : .secondaryLabel
         
-        likeCountLabel.text = "\(postLikes.count)"
-        likeCountLabel.textColor = postLikes.userLikes ? .vkLikePrimary : .secondaryLabel
+        likeCountLabel.text = "\(post.likes.count)"
+        likeCountLabel.textColor = post.likes.userLikes ? .vkLikePrimary : .secondaryLabel
     }
     
     
@@ -86,20 +94,18 @@ final class PostLikeView: UIView {
 extension PostLikeView {
     
     @objc func toggleLikeHandler() {
+        delegate?.didToggleLike(for: post)
+        
         updatePostLikes()
-        delegate?.didToggleLike()
+        updateLikeView()
         
         makeVibration(.medium)
     }
     
     
     private func updatePostLikes() {
-        var updatedPostLikes = postLikes
-        
-        updatedPostLikes.userLikes.toggle()
-        updatedPostLikes.count += postLikes.userLikes ? -1 : 1
-        
-        postLikes = updatedPostLikes
+        post.likes.userLikes.toggle()
+        post.likes.count += post.likes.userLikes ? 1 : -1
     }
     
 }
