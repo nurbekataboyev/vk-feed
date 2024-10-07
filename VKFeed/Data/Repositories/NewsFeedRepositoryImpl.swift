@@ -11,27 +11,29 @@ import Combine
 final class NewsFeedRepositoryImpl: NewsFeedRepository {
     
     private let apiService: APIService
-    private let accessTokenStorage: AccessTokenStorage
+    private let tokenManager: TokenManager
     
     init(apiService: APIService,
-         accessTokenStorage: AccessTokenStorage) {
+         tokenManager: TokenManager) {
         self.apiService = apiService
-        self.accessTokenStorage = accessTokenStorage
+        self.tokenManager = tokenManager
     }
     
-    public func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, any Error> {
-        guard let accessToken = accessTokenStorage.getAccessToken() else {
-            return Fail(error: VKError.Token.invalidToken).eraseToAnyPublisher()
-        }
-        
-        let request = API.Request(
-            scheme: VKAPI.scheme,
-            host: VKAPI.host,
-            path: VKAPI.Paths.newsFeedGet().path,
-            method: .POST,
-            parameters: VKAPI.Paths.newsFeedGet(startFrom: startFrom).parameters(withAccessToken: accessToken))
-        
-        return apiService.fetchData(request: request)
+    public func fetchNewsFeed(startFrom: String?) -> AnyPublisher<NewsFeed, Error> {
+        return tokenManager.getValidAccessToken()
+            .flatMap { [weak self] accessToken -> AnyPublisher<NewsFeed, Error> in
+                guard let self else { return Fail(error: VKError.Token.invalidToken).eraseToAnyPublisher() }
+                
+                let request = API.Request(
+                    scheme: VKAPI.scheme,
+                    host: VKAPI.host,
+                    path: VKAPI.Paths.newsFeedGet().path,
+                    method: .POST,
+                    parameters: VKAPI.Paths.newsFeedGet(startFrom: startFrom).parameters(withAccessToken: accessToken))
+                
+                return apiService.fetchData(request: request)
+            }
+            .eraseToAnyPublisher()
     }
     
 }

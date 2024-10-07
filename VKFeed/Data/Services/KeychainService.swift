@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class KeychainService {
+protocol KeychainService {
+    func save<Value: Encodable>(value: Value, forKey key: KeychainKeys.Key)
+    func get<Value: Decodable>(forKey key: KeychainKeys.Key) -> Value?
+    func delete(forKey key: KeychainKeys.Key)
+}
+
+final class KeychainServiceImpl: KeychainService {
     
     public func save<Value: Encodable>(value: Value, forKey key: KeychainKeys.Key) {
         let encoder = JSONEncoder()

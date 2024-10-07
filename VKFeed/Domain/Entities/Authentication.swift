@@ -8,25 +8,15 @@
 import Foundation
 
 // ----- Authentication -----
-struct AuthenticationResponse: Decodable {
+struct TokenResponse: Decodable {
     let accessToken: String
-    let expiresIn: Int
-    let idToken: String
     let refreshToken: String
-    let scope: String
-    let state: String
-    let tokenType: String
-    let userId: Int
+    let expiresIn: Int
     
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
-        case expiresIn = "expires_in"
-        case idToken = "id_token"
         case refreshToken = "refresh_token"
-        case scope
-        case state
-        case tokenType = "token_type"
-        case userId = "user_id"
+        case expiresIn = "expires_in"
     }
 }
 

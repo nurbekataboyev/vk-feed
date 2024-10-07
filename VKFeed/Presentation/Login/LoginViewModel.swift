@@ -90,32 +90,21 @@ final class LoginViewModelImpl: NSObject, LoginViewModel {
         
         authenticationUseCase.authenticate(withCode: code, deviceID: deviceID, codeVerifier: codeVerifier)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
-            .flatMap { [weak self] authResponse -> AnyPublisher<User, Error> in
-                guard let self else { return Fail(error: VKError.General.unknownError).eraseToAnyPublisher() }
-                
-                authenticationUseCase.saveAccessToken(authResponse.accessToken, expiresIn: authResponse.expiresIn)
-                
-                return userUseCase.fetchUser()
-            }
-            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
                 guard let self else { return }
                 
                 isLoading = false
                 
-                if case .failure(let error) = completion {
+                switch completion {
+                case .finished:
+                    DispatchQueue.main.async {
+                        self.router.setNewsFeed()
+                    }
+                case .failure(let error):
                     errorMessage = error.localizedDescription
                 }
                 
-            } receiveValue: { [weak self] user in
-                guard let self else { return }
-                
-                userUseCase.saveUser(user)
-                
-                DispatchQueue.main.async {
-                    self.router.setNewsFeed()
-                }
-            }
+            } receiveValue: { _ in }
             .store(in: &cancellables)
     }
     

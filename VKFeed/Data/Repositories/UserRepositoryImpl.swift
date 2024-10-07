@@ -12,29 +12,31 @@ final class UserRepositoryImpl: UserRepository {
     
     private let apiService: APIService
     private let userStorage: UserStorage
-    private let accessTokenStorage: AccessTokenStorage
+    private let tokenManager: TokenManager
     
     init(apiService: APIService,
          userStorage: UserStorage,
-         accessTokenStorage: AccessTokenStorage) {
+         tokenManager: TokenManager) {
         self.apiService = apiService
         self.userStorage = userStorage
-        self.accessTokenStorage = accessTokenStorage
+        self.tokenManager = tokenManager
     }
     
     public func fetchUser() -> AnyPublisher<User, Error> {
-        guard let accessToken = accessTokenStorage.getAccessToken() else {
-            return Fail(error: VKError.Token.invalidToken).eraseToAnyPublisher()
-        }
-        
-        let request = API.Request(
-            scheme: VKAPI.scheme,
-            host: VKAPI.host,
-            path: VKAPI.Paths.usersGet.path,
-            method: .POST,
-            parameters: VKAPI.Paths.usersGet.parameters(withAccessToken: accessToken))
-        
-        return apiService.fetchData(request: request)
+        return tokenManager.getValidAccessToken()
+            .flatMap { [weak self] accessToken -> AnyPublisher<User, Error> in
+                guard let self else { return Fail(error: VKError.Token.invalidToken).eraseToAnyPublisher() }
+                
+                let request = API.Request(
+                    scheme: VKAPI.scheme,
+                    host: VKAPI.host,
+                    path: VKAPI.Paths.usersGet.path,
+                    method: .POST,
+                    parameters: VKAPI.Paths.usersGet.parameters(withAccessToken: accessToken))
+                
+                return apiService.fetchData(request: request)
+            }
+            .eraseToAnyPublisher()
     }
     
     

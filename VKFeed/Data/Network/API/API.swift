@@ -71,14 +71,17 @@ struct VKIDAPI {
     
     enum Paths {
         case authorize(codeChallenge: String? = nil)
-        case oauth2Auth(code: String? = nil, deviceID: String? = nil, codeVerifier: String? = nil)
+        case oauth2AuthAuthenticationCode(code: String? = nil, deviceID: String? = nil, codeVerifier: String? = nil)
+        case oauth2AuthRefreshToken(refreshToken: String? = nil, deviceID: String? = nil)
         case oauth2Logout(accessToken: String? = nil)
         
         var path: String {
             switch self {
             case .authorize:
                 return "/authorize"
-            case .oauth2Auth:
+            case .oauth2AuthAuthenticationCode:
+                return "/oauth2/auth"
+            case .oauth2AuthRefreshToken:
                 return "/oauth2/auth"
             case .oauth2Logout:
                 return "/oauth2/logout"
@@ -96,7 +99,7 @@ extension VKIDAPI.Paths {
         case .authorize:
             return headers
             
-        case .oauth2Auth:
+        case .oauth2AuthAuthenticationCode, .oauth2AuthRefreshToken:
             headers[API.HeaderField.contentType] = API.HeaderValue.applicationJSON
             
             return headers
@@ -118,8 +121,11 @@ extension VKIDAPI.Paths {
         case .authorize:
             return nil
             
-        case .oauth2Auth(let code, _, _):
+        case .oauth2AuthAuthenticationCode(let code, _, _):
             body["code"] = code
+        
+        case .oauth2AuthRefreshToken(let refreshToken, _):
+            body["refresh_token"] = refreshToken
             
         case .oauth2Logout:
             return nil
@@ -149,7 +155,7 @@ extension VKIDAPI.Paths {
             
             return params
             
-        case .oauth2Auth(_, let deviceID, let codeVerifier):
+        case .oauth2AuthAuthenticationCode(_, let deviceID, let codeVerifier):
             params["state"] = "abracadabracodeexchange"
             params["grant_type"] = "authorization_code"
             params["redirect_uri"] = VKConfig.redirectURI
@@ -158,6 +164,13 @@ extension VKIDAPI.Paths {
                 params["device_id"] = deviceID
                 params["code_verifier"] = codeVerifier
             }
+            
+            return params
+            
+        case .oauth2AuthRefreshToken(_, let deviceID):
+            params["grant_type"] = "refresh_token"
+            
+            if let deviceID { params["device_id"] = deviceID }
             
             return params
             

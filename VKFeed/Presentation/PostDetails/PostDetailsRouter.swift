@@ -19,9 +19,11 @@ final class PostDetailsRouterImpl: PostDetailsRouter {
     
     static func configure(with post: Post) -> UIViewController {
         let apiService = APIService()
-        let keychainService = KeychainService()
-        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
-        let postRepository = PostRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
+        let keychainService = KeychainServiceImpl()
+        let tokenStorage = TokenStorageImpl(keychainService: keychainService)
+        let tokenRepository = TokenRepositoryImpl(apiService: apiService, tokenStorage: tokenStorage)
+        let tokenManager = TokenManagerImpl(tokenRepository: tokenRepository)
+        let postRepository = PostRepositoryImpl(apiService: apiService, tokenManager: tokenManager)
         let postLikeUseCase = PostLikeUseCaseImpl(postRepository: postRepository)
         let router = PostDetailsRouterImpl()
         let viewModel = PostDetailsViewModelImpl(post: post, postLikeUseCase: postLikeUseCase, router: router)
