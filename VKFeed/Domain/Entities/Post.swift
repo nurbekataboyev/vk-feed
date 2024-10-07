@@ -8,7 +8,7 @@
 import Foundation
 
 // ----- Post -----
-struct Post {
+struct Post: Equatable, Hashable {
     let id: Int
     let text: String
     let photoURL: String?
@@ -50,12 +50,12 @@ extension Post {
     
 }
 
-struct PostLikes {
+struct PostLikes: Equatable, Hashable {
     var count: Int
     var userLikes: Bool
 }
 
-struct PostAuthor {
+struct PostAuthor: Equatable, Hashable {
     let id: Int
     let name: String
     let photoURL: String
