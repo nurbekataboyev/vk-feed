@@ -18,14 +18,16 @@ final class LoginRouterImpl: LoginRouter {
     private weak var viewController: UIViewController?
     
     static func configure() -> UIViewController {
-        let keychainService = KeychainService()
+        let keychainService = KeychainServiceImpl()
         let apiService = APIService()
-        let accessTokenStorage = AccessTokenStorageImpl(keychainService: keychainService)
-        let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, accessTokenStorage: accessTokenStorage)
-        let userDefaultsService = UserDefaultsService()
+        let tokenStorage = TokenStorageImpl(keychainService: keychainService)
+        let tokenRepository = TokenRepositoryImpl(apiService: apiService, tokenStorage: tokenStorage)
+        let tokenManager = TokenManagerImpl(tokenRepository: tokenRepository)
+        let authenticationRepository = AuthenticationRepositoryImpl(apiService: apiService, tokenManager: tokenManager)
+        let userDefaultsService = UserDefaultsServiceImpl()
         let userStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
-        let userRepository = UserRepositoryImpl(apiService: apiService, userStorage: userStorage, accessTokenStorage: accessTokenStorage)
-        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository, userRepository: userRepository)
+        let userRepository = UserRepositoryImpl(apiService: apiService, userStorage: userStorage, tokenManager: tokenManager)
+        let authenticationUseCase = AuthenticationUseCaseImpl(authenticationRepository: authenticationRepository, tokenRepository: tokenRepository, userRepository: userRepository)
         let userUseCase = UserUseCaseImpl(userRepository: userRepository)
         let router = LoginRouterImpl()
         let viewModel = LoginViewModelImpl(authenticationUseCase: authenticationUseCase, userUseCase: userUseCase, router: router)

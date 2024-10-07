@@ -64,8 +64,8 @@ extension SceneDelegate {
     
     
     private var isLoggedIn: Bool {
-        let userDefaultsService = UserDefaultsService()
-        let userStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
+        let userDefaultsService: UserDefaultsService = UserDefaultsServiceImpl()
+        let userStorage: UserStorage = UserStorageImpl(userDefaultsService: userDefaultsService)
         
         let isLoggedIn = userStorage.getUser() != nil
         

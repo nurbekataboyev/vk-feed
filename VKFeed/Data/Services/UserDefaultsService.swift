@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class UserDefaultsService {
+protocol UserDefaultsService {
+    func save<Value: Encodable>(value: Value, forKey key: UserDefaultsKeys.Key)
+    func get<Value: Decodable>(forKey key: UserDefaultsKeys.Key) -> Value?
+    func delete(forKey key: UserDefaultsKeys.Key)
+}
+
+final class UserDefaultsServiceImpl: UserDefaultsService {
     
     private let userDefaults = UserDefaults.standard
     

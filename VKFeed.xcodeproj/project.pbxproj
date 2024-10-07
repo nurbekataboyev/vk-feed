@@ -24,6 +24,9 @@
 		1F9DDB692CB156B2001BB6BF /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB682CB156B2001BB6BF /* UserDefaultsKeys.swift */; };
 		1F9DDB6B2CB157BF001BB6BF /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */; };
 		1F9DDB6D2CB158F5001BB6BF /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB6C2CB158F5001BB6BF /* UserUseCase.swift */; };
+		1F9DDB712CB2C79A001BB6BF /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB702CB2C79A001BB6BF /* TokenRepository.swift */; };
+		1F9DDB732CB2C816001BB6BF /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB722CB2C816001BB6BF /* TokenRepositoryImpl.swift */; };
+		1F9DDB762CB3D03B001BB6BF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DDB752CB3D03B001BB6BF /* TokenManager.swift */; };
 		1FF9658A2CA3F7B6004D752E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965832CA3F7B6004D752E /* Assets.xcassets */; };
 		1FF9658C2CA3F7B6004D752E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF965862CA3F7B6004D752E /* LaunchScreen.storyboard */; };
 		1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965822CA3F7B6004D752E /* AppDelegate.swift */; };
@@ -51,7 +54,6 @@
 		1FF965D02CA425BE004D752E /* PostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965CF2CA425BE004D752E /* PostDetailsViewController.swift */; };
 		1FF965D22CA425C7004D752E /* PostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965D12CA425C7004D752E /* PostDetailsViewModel.swift */; };
 		1FF965D42CA425CE004D752E /* PostDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965D32CA425CE004D752E /* PostDetailsRouter.swift */; };
-		1FF965D72CA4261B004D752E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D62CA4261B004D752E /* Swinject */; };
 		1FF965DA2CA42624004D752E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF965D92CA42624004D752E /* SnapKit */; };
 		1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965E62CA558D3004D752E /* VKConfig.swift */; };
 		1FF965EA2CA560F8004D752E /* NewsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965E92CA560F8004D752E /* NewsFeedCollectionViewController.swift */; };
@@ -63,7 +65,7 @@
 		1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F62CA57CD1004D752E /* VKLabel.swift */; };
 		1FF965F92CA57CFB004D752E /* VKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965F82CA57CFB004D752E /* VKImageView.swift */; };
 		1FF965FE2CA5B80A004D752E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FD2CA5B80A004D752E /* UIViewController.swift */; };
-		1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */; };
+		1FF966002CA5C5F4004D752E /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF965FF2CA5C5F4004D752E /* TokenStorage.swift */; };
 		1FF966022CA5C766004D752E /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966012CA5C766004D752E /* KeychainKeys.swift */; };
 		1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF966042CA5CD94004D752E /* KeychainService.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +87,9 @@
 		1F9DDB682CB156B2001BB6BF /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		1F9DDB6C2CB158F5001BB6BF /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		1F9DDB702CB2C79A001BB6BF /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
+		1F9DDB722CB2C816001BB6BF /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
+		1F9DDB752CB3D03B001BB6BF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		1FF9656A2CA3F637004D752E /* VKFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF965822CA3F7B6004D752E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF965832CA3F7B6004D752E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,7 +129,7 @@
 		1FF965F62CA57CD1004D752E /* VKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLabel.swift; sourceTree = "<group>"; };
 		1FF965F82CA57CFB004D752E /* VKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKImageView.swift; sourceTree = "<group>"; };
 		1FF965FD2CA5B80A004D752E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStorage.swift; sourceTree = "<group>"; };
+		1FF965FF2CA5C5F4004D752E /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		1FF966012CA5C766004D752E /* KeychainKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
 		1FF966042CA5CD94004D752E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,7 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F9DDB2B2CA7DD53001BB6BF /* Kingfisher in Frameworks */,
-				1FF965D72CA4261B004D752E /* Swinject in Frameworks */,
 				1FF965DA2CA42624004D752E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +163,14 @@
 				1FF966012CA5C766004D752E /* KeychainKeys.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		1F9DDB742CB3D028001BB6BF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1F9DDB752CB3D03B001BB6BF /* TokenManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		1FF965612CA3F637004D752E = {
@@ -257,6 +269,7 @@
 				1FF965A22CA3F99C004D752E /* Network */,
 				1FF965A12CA3F990004D752E /* Storages */,
 				1FF966032CA5CD86004D752E /* Services */,
+				1F9DDB742CB3D028001BB6BF /* Managers */,
 				1FF965A02CA3F979004D752E /* Repositories */,
 			);
 			path = Data;
@@ -295,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965AB2CA3FDC6004D752E /* AuthenticationRepository.swift */,
+				1F9DDB702CB2C79A001BB6BF /* TokenRepository.swift */,
 				1F9DDB622CB15490001BB6BF /* UserRepository.swift */,
 				1FF965B92CA422AB004D752E /* NewsFeedRepository.swift */,
 				1FF965BB2CA422C4004D752E /* PostRepository.swift */,
@@ -360,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF965A92CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift */,
+				1F9DDB722CB2C816001BB6BF /* TokenRepositoryImpl.swift */,
 				1F9DDB642CB154D6001BB6BF /* UserRepositoryImpl.swift */,
 				1FF965C22CA4231D004D752E /* NewsFeedRepositoryImpl.swift */,
 				1FF965C42CA42327004D752E /* PostRepositoryImpl.swift */,
@@ -371,7 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				1F9DDB6A2CB157BF001BB6BF /* UserStorage.swift */,
-				1FF965FF2CA5C5F4004D752E /* AccessTokenStorage.swift */,
+				1FF965FF2CA5C5F4004D752E /* TokenStorage.swift */,
 			);
 			path = Storages;
 			sourceTree = "<group>";
@@ -448,7 +463,6 @@
 			);
 			name = VKFeed;
 			packageProductDependencies = (
-				1FF965D62CA4261B004D752E /* Swinject */,
 				1FF965D92CA42624004D752E /* SnapKit */,
 				1F9DDB2A2CA7DD53001BB6BF /* Kingfisher */,
 			);
@@ -481,7 +495,6 @@
 			mainGroup = 1FF965612CA3F637004D752E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */,
 				1FF965D82CA42624004D752E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1F9DDB292CA7DD53001BB6BF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
@@ -515,11 +528,12 @@
 				1FF965F32CA57C00004D752E /* UIView+Ext.swift in Sources */,
 				1FF965C12CA422ED004D752E /* APIService.swift in Sources */,
 				1FF965FE2CA5B80A004D752E /* UIViewController.swift in Sources */,
-				1FF966002CA5C5F4004D752E /* AccessTokenStorage.swift in Sources */,
+				1FF966002CA5C5F4004D752E /* TokenStorage.swift in Sources */,
 				1FF965A62CA3FD6E004D752E /* LoginViewController.swift in Sources */,
 				1FF965ED2CA561AA004D752E /* PostCell.swift in Sources */,
 				1FF965B62CA42291004D752E /* NewsFeedUseCase.swift in Sources */,
 				1FF9658D2CA3F7B6004D752E /* AppDelegate.swift in Sources */,
+				1F9DDB762CB3D03B001BB6BF /* TokenManager.swift in Sources */,
 				1FF965D22CA425C7004D752E /* PostDetailsViewModel.swift in Sources */,
 				1F9DDB572CABC8F0001BB6BF /* VKButton.swift in Sources */,
 				1FF965F72CA57CD1004D752E /* VKLabel.swift in Sources */,
@@ -528,6 +542,7 @@
 				1FF965AC2CA3FDC6004D752E /* AuthenticationRepository.swift in Sources */,
 				1FF965A42CA3FD62004D752E /* LoginViewModel.swift in Sources */,
 				1FF966052CA5CD94004D752E /* KeychainService.swift in Sources */,
+				1F9DDB712CB2C79A001BB6BF /* TokenRepository.swift in Sources */,
 				1FF965A82CA3FD81004D752E /* AuthenticationUseCase.swift in Sources */,
 				1F9DDB2D2CA7DD9F001BB6BF /* UIImageView+Ext.swift in Sources */,
 				1FF965C72CA4234B004D752E /* VKError.swift in Sources */,
@@ -539,6 +554,7 @@
 				1F9DDB282CA71CEF001BB6BF /* VKLoadingView.swift in Sources */,
 				1FF965AE2CA41C48004D752E /* LoginRouter.swift in Sources */,
 				1FF965AA2CA3FDA9004D752E /* AuthenticationRepositoryImpl.swift in Sources */,
+				1F9DDB732CB2C816001BB6BF /* TokenRepositoryImpl.swift in Sources */,
 				1FF965E72CA558D3004D752E /* VKConfig.swift in Sources */,
 				1FF965EA2CA560F8004D752E /* NewsFeedCollectionViewController.swift in Sources */,
 				1F9DDB632CB15490001BB6BF /* UserRepository.swift in Sources */,
@@ -798,14 +814,6 @@
 				minimumVersion = 8.0.3;
 			};
 		};
-		1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swinject/Swinject.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.9.1;
-			};
-		};
 		1FF965D82CA42624004D752E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -821,11 +829,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F9DDB292CA7DD53001BB6BF /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		1FF965D62CA4261B004D752E /* Swinject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FF965D52CA4261B004D752E /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
 		};
 		1FF965D92CA42624004D752E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

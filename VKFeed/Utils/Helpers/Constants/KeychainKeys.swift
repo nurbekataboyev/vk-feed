@@ -11,6 +11,8 @@ struct KeychainKeys {
     
     enum Key: String {
         case accessToken = "accessTokenKey"
+        case refreshToken = "refreshTokenKey"
+        case deviceID = "deviceIDKey"
         case accessTokenExpiration = "accessTokenExpirationKey"
     }
     
