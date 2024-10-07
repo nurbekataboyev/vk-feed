@@ -120,11 +120,18 @@ final class PostDetailsViewController: UIViewController {
         
         postTextLabel.text = post.text
         
-        postImageView.setImage(from: post.photoURL, placeholder: .postPlaceholder)
+        if let photoURL = post.photoURL {
+            postImageView.setImage(from: photoURL, placeholder: .postPlaceholder)
+            postImageView.isHidden = false
+        } else {
+            postImageView.isHidden = true
+        }
     }
     
     
     private func layout() {
+        let postHasImage = postImageView.image != nil
+        
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -158,15 +165,24 @@ final class PostDetailsViewController: UIViewController {
             $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.padding)
         }
         
-        postImageView.snp.makeConstraints {
-            $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
-            $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.padding)
-            $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.padding)
-            $0.height.equalTo(postImageView.snp.width)
+        if postHasImage {
+            postImageView.snp.makeConstraints {
+                $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
+                $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.padding)
+                $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.padding)
+                $0.height.equalTo(postImageView.snp.width)
+            }
+            
+            postLikeView.snp.makeConstraints {
+                $0.top.equalTo(postImageView.snp.bottom).offset(GlobalConstants.Padding.small)
+            }
+        } else {
+            postLikeView.snp.makeConstraints {
+                $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
+            }
         }
         
         postLikeView.snp.makeConstraints {
-            $0.top.equalTo(postImageView.snp.bottom).offset(GlobalConstants.Padding.small)
             $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.padding)
             $0.bottom.equalTo(containerView.snp.bottom).inset(GlobalConstants.Padding.medium)
         }
