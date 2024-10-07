@@ -30,9 +30,30 @@ final class PostCell: UICollectionViewCell {
         
         postTextLabel.text = post.text
         
-        postImageView.setImage(from: post.photoURL, placeholder: .postPlaceholder)
+        if let photoURL = post.photoURL {
+            postImageView.setImage(from: photoURL, placeholder: .postPlaceholder)
+            postImageView.isHidden = false
+        } else {
+            postImageView.isHidden = true
+        }
         
         layout()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        authorAvatarImageView.image = nil
+        authorNameLabel.text = nil
+        postDateLabel.text = nil
+        postTextLabel.text = nil
+        postImageView.image = nil
+        
+        authorAvatarImageView.snp.removeConstraints()
+        authorNameLabel.snp.removeConstraints()
+        postDateLabel.snp.removeConstraints()
+        postTextLabel.snp.removeConstraints()
+        postImageView.snp.removeConstraints()
     }
     
     override init(frame: CGRect) {
@@ -60,6 +81,8 @@ final class PostCell: UICollectionViewCell {
     
     
     private func layout() {
+        let postHasImage = postImageView.image != nil
+        
         authorAvatarImageView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(GlobalConstants.Padding.medium)
             $0.size.equalTo(Constans.avatarSize)
@@ -82,11 +105,17 @@ final class PostCell: UICollectionViewCell {
             $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
         }
         
-        postImageView.snp.makeConstraints {
-            $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
-            $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
-            $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
-            $0.height.equalTo(postImageView.snp.width)
+        if postHasImage {
+            postImageView.snp.makeConstraints {
+                $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
+                $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
+                $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
+                $0.height.equalTo(postImageView.snp.width)
+            }
+        } else {
+            postTextLabel.snp.makeConstraints {
+                $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
+            }
         }
     }
     
