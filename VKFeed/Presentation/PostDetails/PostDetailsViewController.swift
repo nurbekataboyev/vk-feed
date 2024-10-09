@@ -15,9 +15,21 @@ protocol PostDetailsDelegate: AnyObject {
 
 final class PostDetailsViewController: UIViewController {
     
-    private struct Constans {
+    private struct Constants {
         static let avatarSize: CGFloat = 48
         static let tinyPadding: CGFloat = 4
+        
+        static func calculatePostImageHeight(_ post: Post, in view: UIView) -> CGFloat {
+            if let originalHeight = post.photo?.height,
+               let originalWidth = post.photo?.width {
+                let postImageWidth: Double = view.bounds.width - (2 * GlobalConstants.Padding.padding)
+                let aspectRatio = Double(originalHeight) / Double(originalWidth)
+                let postImageHeight = postImageWidth * aspectRatio
+                
+                return postImageHeight
+            }
+            return 0
+        }
     }
     
     private var post: Post
@@ -75,15 +87,8 @@ final class PostDetailsViewController: UIViewController {
     
     
     private func updatePost(_ post: Post) {
-        let isOldPost = self.post == post
-        
         self.post = post
-        
-        if isOldPost {
-            postLikeView.revertLike()
-        } else {
-            delegate?.didUpdatePost(post)
-        }
+        delegate?.didUpdatePost(post)
     }
     
     
@@ -105,7 +110,7 @@ final class PostDetailsViewController: UIViewController {
         containerView.backgroundColor = .systemBackground
         containerView.addShadow()
         
-        authorAvatarImageView.layer.cornerRadius = Constans.avatarSize / 2
+        authorAvatarImageView.layer.cornerRadius = Constants.avatarSize / 2
         authorAvatarImageView.clipsToBounds = true
         
         postTextLabel.numberOfLines = .max
@@ -150,17 +155,17 @@ final class PostDetailsViewController: UIViewController {
         authorAvatarImageView.snp.makeConstraints {
             $0.top.equalTo(containerView.snp.top).offset(GlobalConstants.Padding.medium)
             $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.medium)
-            $0.size.equalTo(Constans.avatarSize)
+            $0.size.equalTo(Constants.avatarSize)
         }
         
         authorNameLabel.snp.makeConstraints {
-            $0.top.equalTo(authorAvatarImageView.snp.top).offset(Constans.tinyPadding)
+            $0.top.equalTo(authorAvatarImageView.snp.top).offset(Constants.tinyPadding)
             $0.leading.equalTo(authorAvatarImageView.snp.trailing).offset(GlobalConstants.Padding.small)
             $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.medium)
         }
         
         postDateLabel.snp.makeConstraints {
-            $0.bottom.equalTo(authorAvatarImageView.snp.bottom).inset(Constans.tinyPadding)
+            $0.bottom.equalTo(authorAvatarImageView.snp.bottom).inset(Constants.tinyPadding)
             $0.leading.equalTo(authorAvatarImageView.snp.trailing).offset(GlobalConstants.Padding.small)
             $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.medium)
         }
@@ -176,7 +181,7 @@ final class PostDetailsViewController: UIViewController {
                 $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
                 $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.padding)
                 $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.padding)
-                $0.height.equalTo(calculatePostImageHeight())
+                $0.height.equalTo(Constants.calculatePostImageHeight(post, in: view))
             }
             
             postLikeView.snp.makeConstraints {
@@ -206,19 +211,6 @@ extension PostDetailsViewController {
     
     @objc func closeButtonHandler() {
         viewModel.close()
-    }
-    
-    
-    private func calculatePostImageHeight() -> CGFloat {
-        if let originalHeight = post.photo?.height,
-           let originalWidth = post.photo?.width {
-            let postImageWidth: CGFloat = view.bounds.width - (2 * GlobalConstants.Padding.padding)
-            let aspectRatio = CGFloat(originalHeight / originalWidth)
-            let postImageHeight = postImageWidth * aspectRatio
-            
-            return postImageHeight
-        }
-        return 0
     }
     
 }

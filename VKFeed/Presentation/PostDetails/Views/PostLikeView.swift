@@ -14,7 +14,7 @@ protocol PostLikeDelegate: AnyObject {
 
 final class PostLikeView: UIView {
     
-    private struct Constans {
+    private struct Constants {
         static let height: CGFloat = 48
         static let likeImageSize: CGFloat = 25
     }
@@ -36,14 +36,8 @@ final class PostLikeView: UIView {
     }
     
     
-    public func revertLike() {
-        updatePostLikes()
-        updateLikeView()
-    }
-    
-    
     private func setupViews() {
-        layer.cornerRadius = Constans.height / 2
+        layer.cornerRadius = Constants.height / 2
         clipsToBounds = true
         isUserInteractionEnabled = true
         
@@ -67,13 +61,13 @@ final class PostLikeView: UIView {
     
     private func layout() {
         snp.makeConstraints {
-            $0.height.equalTo(Constans.height)
+            $0.height.equalTo(Constants.height)
         }
         
         likeImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(GlobalConstants.Padding.medium)
-            $0.size.equalTo(Constans.likeImageSize)
+            $0.size.equalTo(Constants.likeImageSize)
         }
         
         likeCountLabel.snp.makeConstraints {

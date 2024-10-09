@@ -23,6 +23,7 @@ final class PostDetailsViewModelImpl: PostDetailsViewModel {
     private let postLikeUseCase: PostLikeUseCase
     private let router: PostDetailsRouter
     
+    private var likeToggleSubject = PassthroughSubject<Post, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     @Published private var post: Post
@@ -43,10 +44,37 @@ final class PostDetailsViewModelImpl: PostDetailsViewModel {
         self.post = post
         self.postLikeUseCase = postLikeUseCase
         self.router = router
+        
+        setupLikeToggleDebounce()
     }
     
     
     public func toggleLike(for post: Post) {
+        likeToggleSubject.send(post)
+    }
+    
+    
+    public func close() {
+        router.close()
+    }
+    
+}
+
+
+extension PostDetailsViewModelImpl {
+    
+    private func setupLikeToggleDebounce() {
+        likeToggleSubject
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink { [weak self] post in
+                guard let self else { return }
+                performLikeToggle(for: post)
+            }
+            .store(in: &cancellables)
+    }
+    
+    
+    private func performLikeToggle(for post: Post) {
         postLikeUseCase.toggleLike(for: post)
             .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink { [weak self] completion in
@@ -62,11 +90,6 @@ final class PostDetailsViewModelImpl: PostDetailsViewModel {
                 self.post = updatedPost
             }
             .store(in: &cancellables)
-    }
-    
-    
-    public func close() {
-        router.close()
     }
     
 }
