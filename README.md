@@ -44,9 +44,7 @@ The app is built following the **Clean Architecture** principles and the **MVVM*
 
 ## Screenshots
 
-![Authentication](screenshots/auth.jpg)
-![News Feed](screenshots/feed.jpg)
-![Post Details](screenshots/post.jpg)
+![Screenshots](screenshots/vkfeed.png)
 
 ## License
 
