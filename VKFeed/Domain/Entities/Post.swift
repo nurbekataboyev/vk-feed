@@ -11,7 +11,7 @@ import Foundation
 struct Post: Equatable, Hashable {
     let id: Int
     let text: String
-    let photoURL: String?
+    let photo: PostPhoto?
     var likes: PostLikes
     let createdAt: Date
     let author: PostAuthor?
@@ -27,8 +27,8 @@ extension Post {
         
         var attachments: [NewsFeedAttachment] = []
         
-        if let photoURL {
-            let photo = Photo(height: 0, width: 0, url: photoURL)
+        if let photo, let photoURL = photo.photoURL {
+            let photo = Photo(height: photo.height, width: photo.width, url: photoURL)
             let attachmentPhoto = AttachmentPhoto(photo: photo)
             let newsFeedAttachment = NewsFeedAttachment(photo: attachmentPhoto)
             
@@ -48,6 +48,12 @@ extension Post {
         return newsFeedItem
     }
     
+}
+
+struct PostPhoto: Equatable, Hashable {
+    let photoURL: String?
+    let height: Int
+    let width: Int
 }
 
 struct PostLikes: Equatable, Hashable {

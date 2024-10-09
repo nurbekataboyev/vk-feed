@@ -126,7 +126,7 @@ final class PostDetailsViewController: UIViewController {
         
         postTextLabel.text = post.text
         
-        if let photoURL = post.photoURL {
+        if let photoURL = post.photo?.photoURL {
             postImageView.setImage(from: photoURL, placeholder: .postPlaceholder)
             postImageView.isHidden = false
         } else {
@@ -176,7 +176,7 @@ final class PostDetailsViewController: UIViewController {
                 $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
                 $0.leading.equalTo(containerView.snp.leading).offset(GlobalConstants.Padding.padding)
                 $0.trailing.equalTo(containerView.snp.trailing).inset(GlobalConstants.Padding.padding)
-                $0.height.equalTo(postImageView.snp.width)
+                $0.height.equalTo(calculatePostImageHeight())
             }
             
             postLikeView.snp.makeConstraints {
@@ -206,6 +206,19 @@ extension PostDetailsViewController {
     
     @objc func closeButtonHandler() {
         viewModel.close()
+    }
+    
+    
+    private func calculatePostImageHeight() -> CGFloat {
+        if let originalHeight = post.photo?.height,
+           let originalWidth = post.photo?.width {
+            let postImageWidth: CGFloat = view.bounds.width - (2 * GlobalConstants.Padding.padding)
+            let aspectRatio = CGFloat(originalHeight / originalWidth)
+            let postImageHeight = postImageWidth * aspectRatio
+            
+            return postImageHeight
+        }
+        return 0
     }
     
 }

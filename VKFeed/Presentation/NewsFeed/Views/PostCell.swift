@@ -15,6 +15,8 @@ final class PostCell: UICollectionViewCell {
         static let tinyPadding: CGFloat = 4
     }
     
+    private var post: Post?
+    
     private var authorAvatarImageView = VKImageView(contentMode: .scaleAspectFill)
     private var authorNameLabel = VKLabel(style: .headline, weight: .semibold)
     private var postDateLabel = VKLabel(style: .footnote, color: .secondaryLabel)
@@ -22,6 +24,8 @@ final class PostCell: UICollectionViewCell {
     private var postImageView = VKImageView(contentMode: .scaleAspectFill)
     
     public func setup(with post: Post) {
+        self.post = post
+        
         authorAvatarImageView.setImage(from: post.author?.photoURL, placeholder: .profileImagePlaceholder)
         
         authorNameLabel.text = post.author?.name
@@ -30,7 +34,7 @@ final class PostCell: UICollectionViewCell {
         
         postTextLabel.text = post.text
         
-        if let photoURL = post.photoURL {
+        if let photoURL = post.photo?.photoURL {
             postImageView.setImage(from: photoURL, placeholder: .postPlaceholder)
             postImageView.isHidden = false
         } else {
@@ -42,6 +46,8 @@ final class PostCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        post = nil
         
         authorAvatarImageView.image = nil
         authorNameLabel.text = nil
@@ -110,7 +116,7 @@ final class PostCell: UICollectionViewCell {
                 $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
                 $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
                 $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
-                $0.height.equalTo(postImageView.snp.width)
+                $0.height.equalTo(calculatePostImageHeight())
             }
         } else {
             postTextLabel.snp.makeConstraints {
@@ -122,6 +128,23 @@ final class PostCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+
+extension PostCell {
+    
+    private func calculatePostImageHeight() -> CGFloat {
+        if let originalHeight = post?.photo?.height,
+           let originalWidth = post?.photo?.width {
+            let postImageWidth: CGFloat = bounds.width - (2 * GlobalConstants.Padding.padding)
+            let aspectRatio = CGFloat(originalHeight / originalWidth)
+            let postImageHeight = postImageWidth * aspectRatio
+            
+            return postImageHeight
+        }
+        return 0
     }
     
 }
