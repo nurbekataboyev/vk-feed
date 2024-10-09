@@ -41,7 +41,12 @@ extension NewsFeedItem {
     
     public func toPost(groups: [NewsFeedGroup]) -> Post {
         let likes = PostLikes(count: likes.count, userLikes: likes.userLikes == 1)
+        var postPhoto: PostPhoto? = nil
         var author: PostAuthor? = nil
+        
+        if let photo = attachments.first?.photo?.photo {
+            postPhoto = PostPhoto(photoURL: photo.url, height: photo.height, width: photo.width)
+        }
         
         if let postAuthor = groups.first(where: { $0.id == abs(sourceID) }) {
             author = PostAuthor(id: postAuthor.id, name: postAuthor.name, photoURL: postAuthor.photoURL)
@@ -50,7 +55,7 @@ extension NewsFeedItem {
         let post = Post(
             id: postID,
             text: text,
-            photoURL: attachments.first?.photo?.photo.url,
+            photo: postPhoto,
             likes: likes,
             createdAt: Date(timeIntervalSince1970: TimeInterval(date)),
             author: author)
