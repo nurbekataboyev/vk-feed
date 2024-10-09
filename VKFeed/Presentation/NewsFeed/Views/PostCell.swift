@@ -10,9 +10,21 @@ import SnapKit
 
 final class PostCell: UICollectionViewCell {
     
-    private struct Constans {
+    private struct Constants {
         static let avatarSize: CGFloat = 48
         static let tinyPadding: CGFloat = 4
+        
+        static func calculatePostImageHeight(_ post: Post?, in view: UIView) -> CGFloat {
+            if let originalHeight = post?.photo?.height,
+               let originalWidth = post?.photo?.width {
+                let postImageWidth: Double = view.bounds.width - (2 * GlobalConstants.Padding.padding)
+                let aspectRatio = Double(originalHeight) / Double(originalWidth)
+                let postImageHeight = postImageWidth * aspectRatio
+                
+                return postImageHeight
+            }
+            return 0
+        }
     }
     
     private var post: Post?
@@ -76,7 +88,7 @@ final class PostCell: UICollectionViewCell {
         
         addSubviews(authorAvatarImageView, authorNameLabel, postDateLabel, postTextLabel, postImageView)
         
-        authorAvatarImageView.layer.cornerRadius = Constans.avatarSize / 2
+        authorAvatarImageView.layer.cornerRadius = Constants.avatarSize / 2
         authorAvatarImageView.clipsToBounds = true
         
         postTextLabel.numberOfLines = .max
@@ -91,17 +103,17 @@ final class PostCell: UICollectionViewCell {
         
         authorAvatarImageView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(GlobalConstants.Padding.medium)
-            $0.size.equalTo(Constans.avatarSize)
+            $0.size.equalTo(Constants.avatarSize)
         }
         
         authorNameLabel.snp.makeConstraints {
-            $0.top.equalTo(authorAvatarImageView.snp.top).offset(Constans.tinyPadding)
+            $0.top.equalTo(authorAvatarImageView.snp.top).offset(Constants.tinyPadding)
             $0.leading.equalTo(authorAvatarImageView.snp.trailing).offset(GlobalConstants.Padding.small)
             $0.trailing.equalToSuperview().inset(GlobalConstants.Padding.medium)
         }
         
         postDateLabel.snp.makeConstraints {
-            $0.bottom.equalTo(authorAvatarImageView.snp.bottom).inset(Constans.tinyPadding)
+            $0.bottom.equalTo(authorAvatarImageView.snp.bottom).inset(Constants.tinyPadding)
             $0.leading.equalTo(authorAvatarImageView.snp.trailing).offset(GlobalConstants.Padding.small)
             $0.trailing.equalToSuperview().inset(GlobalConstants.Padding.medium)
         }
@@ -116,7 +128,7 @@ final class PostCell: UICollectionViewCell {
                 $0.top.equalTo(postTextLabel.snp.bottom).offset(GlobalConstants.Padding.small)
                 $0.leading.trailing.equalToSuperview().inset(GlobalConstants.Padding.padding)
                 $0.bottom.equalToSuperview().inset(GlobalConstants.Padding.medium)
-                $0.height.equalTo(calculatePostImageHeight())
+                $0.height.equalTo(Constants.calculatePostImageHeight(post, in: self))
             }
         } else {
             postTextLabel.snp.makeConstraints {
@@ -128,23 +140,6 @@ final class PostCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-
-extension PostCell {
-    
-    private func calculatePostImageHeight() -> CGFloat {
-        if let originalHeight = post?.photo?.height,
-           let originalWidth = post?.photo?.width {
-            let postImageWidth: CGFloat = bounds.width - (2 * GlobalConstants.Padding.padding)
-            let aspectRatio = CGFloat(originalHeight / originalWidth)
-            let postImageHeight = postImageWidth * aspectRatio
-            
-            return postImageHeight
-        }
-        return 0
     }
     
 }
